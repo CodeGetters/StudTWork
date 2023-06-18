@@ -1,0 +1,23 @@
+{
+  "name": "@studious/front",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "author": "CodeGetters",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --ext .vue,.js,.ts,.jsx,.tsx --fix",
+    "format": "prettier --write ./**/*.{vue,ts,tsx,js,jsx,css,less,scss,json,md}"
+  },
+  "dependencies": {
+    "vue": "^3.2.47"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.1.0",
+    "eslint": "^8.43.0",
+    "eslint-plugin-vue": "^9.14.1",
+    "vite": "^4.3.9"
+  }
+}
