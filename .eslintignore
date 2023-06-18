@@ -1,1 +1,8 @@
+
 commitlint.config.js
+
+
+
+packages/studiousFront/auto-imports.d.ts
+packages/studiousFront/components.d.ts
+

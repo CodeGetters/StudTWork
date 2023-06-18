@@ -1,5 +1,8 @@
 <script setup>
 import HelloWorld from "./components/HelloWorld.vue";
+// import { ElConfigProvider } from "element-plus";
+
+import { Check } from "@element-plus/icons-vue";
 </script>
 
 <template>
@@ -11,6 +14,7 @@ import HelloWorld from "./components/HelloWorld.vue";
       <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
     </a>
   </div>
+  <el-button :type="success" :icon="Check" circle />
   <HelloWorld msg="Vite + Vue" />
 </template>
 
