@@ -1,0 +1,23 @@
+{
+  "name": "@studious/back",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint . --ext .vue,.js,.ts,.jsx,.tsx --fix",
+    "format": "prettier --write ./**/*.{vue,ts,tsx,js,jsx,css,less,scss,json,md}"
+  },
+  "keywords": [],
+  "author": "CodeGetters",
+  "license": "ISC",
+  "dependencies": {
+    "koa": "^2.14.2",
+    "koa-cors": "^0.0.16",
+    "nodemon": "^2.0.22"
+  },
+  "devDependencies": {
+    "eslint": "^8.43.0"
+  }
+}
