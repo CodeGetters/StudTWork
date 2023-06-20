@@ -9,6 +9,7 @@
     "dev:back": "pnpm -F @studious/back start",
     "dev:lint": "pnpm -F @studious/front lint & pnpm -F @studious/back lint",
     "dev:format": "pnpm -F @studious/front format& pnpm -F @studious/back format",
+    "build:front": "pnpm -F @studious/front build",
     "lint": "eslint . --ext .vue,.js,.ts,.jsx,.tsx --fix",
     "format": "prettier --write ./**/*.{vue,ts,tsx,js,jsx,css,less,scss,json,md}",
     "test": "echo \"Error: no test specified\" && exit 1",
