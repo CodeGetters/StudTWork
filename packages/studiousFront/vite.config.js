@@ -4,7 +4,7 @@
  * @version:
  * @Date: 2023-06-19 22:16:29
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-06-21 16:38:38
+ * @LastEditTime: 2023-06-21 18:23:13
  */
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
