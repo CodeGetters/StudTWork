@@ -1,3 +1,11 @@
+/*
+ * @Descripttion:
+ * @Author: CodeGetters
+ * @version:
+ * @Date: 2023-06-19 22:16:29
+ * @LastEditors: CodeGetters
+ * @LastEditTime: 2023-06-21 16:38:38
+ */
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import AutoImport from "unplugin-auto-import/vite";
@@ -10,6 +18,7 @@ import { FileSystemIconLoader } from "unplugin-icons/loaders";
 import IconsResolver from "unplugin-icons/resolver";
 
 import postcssPresetEnv from "postcss-preset-env";
+
 // import postcssPxToViewport from "postcss-px-viewport";
 // https://vitejs.dev/config/
 export default defineConfig({

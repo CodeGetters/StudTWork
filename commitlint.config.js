@@ -1,3 +1,11 @@
+/*
+ * @Descripttion:
+ * @Author: CodeGetters
+ * @version:
+ * @Date: 2023-06-18 20:30:52
+ * @LastEditors: CodeGetters
+ * @LastEditTime: 2023-06-21 16:37:43
+ */
 // commitlint.config.js
 
 module.exports = {

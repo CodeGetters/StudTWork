@@ -1,5 +1,15 @@
+<!--
+ * @Descripttion:主页
+ * @Author: CodeGetters
+ * @version:
+ * @Date: 2023-06-20 16:51:34
+ * @LastEditors: CodeGetters
+ * @LastEditTime: 2023-06-21 16:59:42
+-->
+
 <script setup>
 import { Check } from "@element-plus/icons-vue";
+const api = import.meta.env.VITE_BASE_URL;
 </script>
 
 <template>
@@ -17,6 +27,7 @@ import { Check } from "@element-plus/icons-vue";
   <div class="icon">
     <IconHomeUser style="width: 100%; height: 100%" />
   </div>
+  <div>{{ api }}</div>
 </template>
 
 <style scoped lang="less">

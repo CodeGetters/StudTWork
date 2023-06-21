@@ -1,3 +1,11 @@
+<!--
+ * @Descripttion: 示例组件
+ * @Author: CodeGetters
+ * @version:
+ * @Date: 2023-06-18 20:30:52
+ * @LastEditors: CodeGetters
+ * @LastEditTime: 2023-06-21 16:41:36
+-->
 <script setup>
 import { ref } from "vue";
 

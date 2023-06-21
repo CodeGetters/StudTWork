@@ -1,3 +1,11 @@
+/*
+ * @Descripttion: 总路由
+ * @Author: CodeGetters
+ * @version:
+ * @Date: 2023-06-18 21:18:19
+ * @LastEditors: CodeGetters
+ * @LastEditTime: 2023-06-21 16:42:11
+ */
 import { createRouter, createWebHistory } from "vue-router";
 
 const Home = () => import("../views/HomePage.vue");
