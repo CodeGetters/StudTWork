@@ -4,16 +4,17 @@
   "version": "0.0.0",
   "author": "CodeGetters",
   "scripts": {
-    "dev": "vite --open",
+    "dev": "vite --open --port 4000",
     "build": "vite build",
-    "preview": "vite preview",
+    "preview": "vite preview --open --port 3000",
     "lint": "eslint . --ext .vue,.js,.ts,.jsx,.tsx --fix",
     "format": "prettier --write ./**/*.{vue,ts,tsx,js,jsx,css,less,scss,json,md}"
   },
   "dependencies": {
     "element-plus": "^2.3.6",
+    "normalize.css": "^8.0.1",
     "pinia": "^2.1.4",
-    "vue": "^3.2.47",
+    "vue": "^3.3.4",
     "vue-router": "4"
   },
   "devDependencies": {
