@@ -13,7 +13,7 @@ import router from "./router/index";
 // 初始化样式表
 import "normalize.css";
 
-import i18n from "./i18n/index";
+import i18n from "./i18n/index.js";
 
 import App from "./App.vue";
 

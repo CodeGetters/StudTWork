@@ -4,7 +4,7 @@
  * @version:
  * @Date: 2023-06-20 16:51:34
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-06-22 14:03:55
+ * @LastEditTime: 2023-06-22 14:15:22
 -->
 <script setup>
 import { ref, computed } from "vue";
@@ -44,6 +44,7 @@ const toggle = () => {
 
   <input :placeholder="$t('test')" type="text" />
   <div>{{ $t("language.zh") }}</div>
+  <div>{{ $t("language.en") }}</div>
 
   <!-- elelment：国际化示例 -->
   <div>
