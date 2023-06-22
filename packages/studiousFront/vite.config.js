@@ -4,7 +4,7 @@
  * @version:
  * @Date: 2023-06-19 22:16:29
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-06-22 12:14:22
+ * @LastEditTime: 2023-06-22 13:28:38
  */
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
@@ -18,6 +18,7 @@ import { FileSystemIconLoader } from "unplugin-icons/loaders";
 import IconsResolver from "unplugin-icons/resolver";
 
 import postcssPresetEnv from "postcss-preset-env";
+
 import { resolve } from "node:path";
 
 // import postcssPxToViewport from "postcss-px-viewport";
@@ -30,13 +31,23 @@ export default defineConfig({
       "@": fileURLToPath(new URL("./src", import.meta.url)),
     },
   },
-  build: {},
+  build: {
+    rollupOptions: {
+      // 确保外部化处理不想打包进库的依赖
+      external: ["element-plus"],
+      output: {
+        // 入口文件名
+        entryFileNames: "assets/js/[name].js",
+        // 块文件名
+        chunkFileNames: "assets/js/[name]-[hash].js",
+        // 资源文件名
+        assetFileNames: "assets/[ext]/[name]-[hash]-.[ext]",
+      },
+    },
+  },
   css: {
     preprocessorOptions: {
-      less: {
-        // additionalData: "@import './src/styles/common.css';",
-        import: resolve("./src/styles/common.less"),
-      },
+      less: {},
     },
     postcss: {
       plugins: [
