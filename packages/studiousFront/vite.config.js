@@ -4,7 +4,7 @@
  * @version:
  * @Date: 2023-06-19 22:16:29
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-06-22 08:59:09
+ * @LastEditTime: 2023-06-22 12:07:26
  */
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
@@ -20,6 +20,7 @@ import IconsResolver from "unplugin-icons/resolver";
 import postcssPresetEnv from "postcss-preset-env";
 
 // import postcssPxToViewport from "postcss-px-viewport";
+
 // https://vitejs.dev/config/
 export default defineConfig({
   base: "./",
@@ -32,7 +33,7 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       less: {
-        additionalData: "@import './src/styles/common.css';",
+        // additionalData: "@import './src/styles/common.css';",
       },
     },
     postcss: {
