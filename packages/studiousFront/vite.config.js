@@ -4,10 +4,11 @@
  * @version:
  * @Date: 2023-06-19 22:16:29
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-06-22 13:28:38
+ * @LastEditTime: 2023-06-22 21:08:37
  */
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
+
 import AutoImport from "unplugin-auto-import/vite";
 import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
 import Components from "unplugin-vue-components/vite";
@@ -19,7 +20,7 @@ import IconsResolver from "unplugin-icons/resolver";
 
 import postcssPresetEnv from "postcss-preset-env";
 
-import { resolve } from "node:path";
+import path, { resolve } from "node:path";
 
 // import postcssPxToViewport from "postcss-px-viewport";
 
@@ -29,6 +30,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url)),
+      "vue-i18n": "vue-i18n/dist/vue-i18n.cjs.js",
     },
   },
   build: {
@@ -47,7 +49,20 @@ export default defineConfig({
   },
   css: {
     preprocessorOptions: {
-      less: {},
+      less: {
+        // -----------全局 less 变量配置 1 -------------
+        math: "alwayls",
+        globalVars: {
+          dark: "#000",
+        },
+        // -----------全局 less 变量配置 2 ------------
+        modifyVars: {
+          hack: `true; @import (reference) "${path.resolve(
+            "src/styles/var.less"
+          )}";`,
+        },
+        javascriptEnabled: true,
+      },
     },
     postcss: {
       plugins: [

@@ -4,7 +4,7 @@
  * @version:
  * @Date: 2023-06-18 21:18:19
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-06-22 14:11:32
+ * @LastEditTime: 2023-06-22 20:54:35
  */
 import { createApp } from "vue";
 import pinia from "./store/index";
