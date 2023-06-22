@@ -4,7 +4,7 @@
  * @version:
  * @Date: 2023-06-20 16:51:34
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-06-21 22:19:33
+ * @LastEditTime: 2023-06-22 14:03:55
 -->
 <script setup>
 import { ref, computed } from "vue";
@@ -12,7 +12,7 @@ import { Check } from "@element-plus/icons-vue";
 const api = import.meta.env.VITE_BASE_URL;
 
 // vue-i18n国际化
-import i18n from "../language";
+import i18n from "@/i18n/index.js";
 console.log("中文：", i18n.global.t("language.zh"));
 
 // element-plus 组件国际化
