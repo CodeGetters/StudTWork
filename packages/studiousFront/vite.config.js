@@ -4,7 +4,7 @@
  * @version:
  * @Date: 2023-06-19 22:16:29
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-06-21 18:23:13
+ * @LastEditTime: 2023-06-22 08:59:09
  */
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
@@ -28,7 +28,13 @@ export default defineConfig({
       "@": fileURLToPath(new URL("./src", import.meta.url)),
     },
   },
+  build: {},
   css: {
+    preprocessorOptions: {
+      less: {
+        additionalData: "@import './src/styles/common.css';",
+      },
+    },
     postcss: {
       plugins: [
         postcssPresetEnv(),

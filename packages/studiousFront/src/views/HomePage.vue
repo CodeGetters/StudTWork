@@ -1,12 +1,11 @@
 <!--
- * @Descripttion:主页
+ * @Descripttion:
  * @Author: CodeGetters
  * @version:
  * @Date: 2023-06-20 16:51:34
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-06-21 21:18:47
+ * @LastEditTime: 2023-06-21 22:19:33
 -->
-
 <script setup>
 import { ref, computed } from "vue";
 import { Check } from "@element-plus/icons-vue";
