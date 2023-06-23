@@ -4,7 +4,7 @@
  * @version:
  * @Date: 2023-06-19 22:16:29
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-06-22 21:05:23
+ * @LastEditTime: 2023-06-23 12:28:14
 -->
 
 <template>
@@ -20,5 +20,5 @@
 </template>
 
 <style lang="less">
-@import "./styles/common.less";
+// @import "./styles/common.less";
 </style>

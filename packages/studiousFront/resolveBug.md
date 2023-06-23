@@ -4,7 +4,7 @@
  * @version:
  * @Date: 2023-06-22 13:33:40
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-06-22 13:46:39
+ * @LastEditTime: 2023-06-23 12:25:05
 -->
 
 # resolve Bug
@@ -35,6 +35,8 @@
 
 rollup 处理 less、css 等样式文件需要插件？？？
 
+.gitignore 文件加了默认注释，导致了部分文件没有上传到 github？？？
+
 ## RollupError: Could not resolve "./language/index" from "src/main.js"
 
 - 描述
@@ -42,3 +44,5 @@ rollup 处理 less、css 等样式文件需要插件？？？
 这是使用了 vue-i18n 做的国际化语言配置文件夹，导致 vercel 部署出错
 
 - 原因
+
+.gitignore 文件加了默认注释，导致了部分文件没有上传到 github

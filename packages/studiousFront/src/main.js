@@ -4,7 +4,7 @@
  * @version:
  * @Date: 2023-06-18 21:18:19
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-06-22 20:54:35
+ * @LastEditTime: 2023-06-23 12:27:21
  */
 import { createApp } from "vue";
 import pinia from "./store/index";
@@ -16,6 +16,8 @@ import "normalize.css";
 import i18n from "./i18n/index.js";
 
 import App from "./App.vue";
+
+import "./styles/common.less";
 
 const app = createApp(App);
 
