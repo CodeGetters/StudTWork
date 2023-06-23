@@ -4,7 +4,7 @@
  * @version:
  * @Date: 2023-06-19 22:16:29
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-06-23 12:52:03
+ * @LastEditTime: 2023-06-23 21:55:26
  */
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
@@ -29,6 +29,12 @@ export default defineConfig({
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url)),
       "vue-i18n": "vue-i18n/dist/vue-i18n.cjs.js",
+    },
+  },
+  test: {
+    include: ["test/**/*.test.js"],
+    deps: {
+      inline: ["@vue"],
     },
   },
   build: {
@@ -64,6 +70,10 @@ export default defineConfig({
     vue(),
     AutoImport({
       resolvers: [ElementPlusResolver()],
+      imports: ["vue", "vue-router", "vue-i18n"],
+      dts: "src/auto-imports.d.ts",
+      dirs: ["src/components", "src/store"],
+      vueTemplate: true,
     }),
     Icons({
       autoInstall: true,
@@ -75,6 +85,8 @@ export default defineConfig({
       },
     }),
     Components({
+      extensions: ["vue", "md"],
+      dts: "src/components.d.ts",
       resolvers: [
         ElementPlusResolver(),
         IconsResolver({
