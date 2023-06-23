@@ -4,7 +4,7 @@
  * @version:
  * @Date: 2023-06-18 20:30:52
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-06-22 21:04:06
+ * @LastEditTime: 2023-06-23 12:46:47
 -->
 <script setup>
 defineProps({
@@ -93,6 +93,8 @@ const toggle = () => {
 }
 
 div {
+  background-color: @test-global;
+
   .icon {
     width: 50px;
     height: 50px;

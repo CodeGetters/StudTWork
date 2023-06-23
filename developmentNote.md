@@ -4,7 +4,7 @@
  * @version:
  * @Date: 2023-06-19 22:16:29
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-06-22 21:18:52
+ * @LastEditTime: 2023-06-23 12:58:50
 -->
 
 # 开发笔记
@@ -23,23 +23,23 @@
 
 ## 前端依赖
 
-- vue-router
+### vue-router
 
 路由管理
 
-- pinia
+### pinia
 
 状态管理
 
-- element-plus
+### element-plus
 
 按需引入
 
-- normalize.css
+### normalize.css
 
 样式默认值预设
 
-- vue-i18n
+### vue-i18n
 
 国际化语言支持
 
@@ -90,7 +90,7 @@ console.log("中文：", i18n.global.t("language.zh"));
 </template>
 ```
 
-- element-plus 国际化
+### element-plus 国际化
 
 Element Plus 组件 默认 使用英语
 
@@ -98,7 +98,7 @@ Element Plus 组件 默认 使用英语
 
 [i18n 配置---Config Provider](https://element-plus.gitee.io/zh-CN/component/config-provider.html)
 
-- less 全局变量
+### less 全局变量
 
 vite 4 已经内置了 less、scss 文件得内置支持，所以我们无需引入相应的 loader 依赖只需安装响应的预处理器依赖
 
@@ -129,7 +129,7 @@ css: {
 
 以上是配置 less 全局变量两个方法一个是引入外部的全局变量，是就在之这里直接声明使用
 
-- 打包后文件整理归类
+### 打包后文件整理归类
 
 这里是通过 rollup 配置将打包后的文件进行一个文件整理，比如 js 文件会放在 js 文件夹中，css 文件会放在 css 文件夹中...
 
@@ -148,4 +148,23 @@ build:{
       },
     },
 }
+```
+
+### 路由跳转过渡
+
+name 值是过渡动画的前缀
+
+`component` 中的 is 属性值一定要和最外层的 `router-view` 中的 v-slot 值相同
+
+```vue
+<template>
+  <!-- 关于路由过渡参照：https://blog.csdn.net/fang_my/article/details/125578420 -->
+  <router-view v-slot="{ Component }">
+    <transition mode="out-in" name="fade">
+      <keep-alive>
+        <component :is="Component" />
+      </keep-alive>
+    </transition>
+  </router-view>
+</template>
 ```
