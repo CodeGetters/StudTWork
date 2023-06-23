@@ -4,7 +4,7 @@
  * @version:
  * @Date: 2023-06-21 18:10:04
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-06-22 20:53:06
+ * @LastEditTime: 2023-06-23 12:52:16
 -->
 <script setup></script>
 
@@ -20,6 +20,5 @@
 <style lang="less">
 .button {
   color: red;
-  background-color: @dark;
 }
 </style>
