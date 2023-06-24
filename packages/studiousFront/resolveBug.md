@@ -4,7 +4,7 @@
  * @version:
  * @Date: 2023-06-22 13:33:40
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-06-23 12:49:58
+ * @LastEditTime: 2023-06-24 15:26:23
 -->
 
 # resolve Bug
@@ -126,4 +126,28 @@ export default defineConfig({
     },
   },
 });
+```
+
+## TypeError:Unknown file extension ".css" for "..."
+
+- 描述
+
+在测试 js 文件中引入的 .vue 组件时，vitest 终端报错：
+
+```text
+TypeError:Unknown file extension ".css" for  D:\软件类存储地\桌面\totalCode\Vue\repo\studiousBack\node_modules\.pnpm\registry.npmmirror.com+element-plus@2.3.6_vue@3.3.4\node_modules\element-plus\theme-chalk\base.css
+```
+
+- 解决
+
+乍一看好像是因为文件后缀名不认识 `.css`，在社区中发现这是没有将 `element-plus` 依赖加入 `deps.inline`中，然后重新执行测试
+
+```js
+test: {
+  include: ["test/**/*.test.js"],
+  globals: true,
+  deps: {
+    inline: ["@vue","element-plus"],
+  },
+},
 ```

@@ -4,8 +4,9 @@
  * @version:
  * @Date: 2023-06-19 22:16:29
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-06-23 21:55:26
+ * @LastEditTime: 2023-06-24 16:02:36
  */
+
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 
@@ -33,8 +34,9 @@ export default defineConfig({
   },
   test: {
     include: ["test/**/*.test.js"],
+    globals: true,
     deps: {
-      inline: ["@vue"],
+      inline: ["@vue", "element-plus"],
     },
   },
   build: {
