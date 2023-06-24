@@ -4,7 +4,7 @@
  * @version:
  * @Date: 2023-06-19 22:16:29
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-06-24 16:02:36
+ * @LastEditTime: 2023-06-24 17:08:02
  */
 
 import { defineConfig } from "vite";
@@ -23,9 +23,11 @@ import postcssPresetEnv from "postcss-preset-env";
 
 import path, { resolve } from "node:path";
 
+// import { viteMockServe } from "vite-plugin-mock";
+
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: "./",
+  base: "/",
   resolve: {
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url)),
@@ -97,5 +99,13 @@ export default defineConfig({
         }),
       ],
     }),
+    // viteMockServe({
+    //   // 设置模拟文件的存储文件夹
+    //   mockPath: "./mock/",
+    //   // 是否启用 mock 功能
+    //   enable: true,
+    //   supportTs: false,
+    //   logger: false,
+    // }),
   ],
 });
