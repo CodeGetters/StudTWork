@@ -4,8 +4,9 @@
  * @version:
  * @Date: 2023-06-19 22:16:29
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-06-23 12:52:03
+ * @LastEditTime: 2023-06-24 17:08:02
  */
+
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 
@@ -22,13 +23,22 @@ import postcssPresetEnv from "postcss-preset-env";
 
 import path, { resolve } from "node:path";
 
+// import { viteMockServe } from "vite-plugin-mock";
+
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: "./",
+  base: "/",
   resolve: {
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url)),
       "vue-i18n": "vue-i18n/dist/vue-i18n.cjs.js",
+    },
+  },
+  test: {
+    include: ["test/**/*.test.js"],
+    globals: true,
+    deps: {
+      inline: ["@vue", "element-plus"],
     },
   },
   build: {
@@ -64,6 +74,10 @@ export default defineConfig({
     vue(),
     AutoImport({
       resolvers: [ElementPlusResolver()],
+      imports: ["vue", "vue-router", "vue-i18n"],
+      dts: "src/auto-imports.d.ts",
+      dirs: ["src/components", "src/store"],
+      vueTemplate: true,
     }),
     Icons({
       autoInstall: true,
@@ -75,6 +89,8 @@ export default defineConfig({
       },
     }),
     Components({
+      extensions: ["vue", "md"],
+      dts: "src/components.d.ts",
       resolvers: [
         ElementPlusResolver(),
         IconsResolver({
@@ -83,5 +99,13 @@ export default defineConfig({
         }),
       ],
     }),
+    // viteMockServe({
+    //   // 设置模拟文件的存储文件夹
+    //   mockPath: "./mock/",
+    //   // 是否启用 mock 功能
+    //   enable: true,
+    //   supportTs: false,
+    //   logger: false,
+    // }),
   ],
 });
