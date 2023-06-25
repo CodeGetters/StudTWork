@@ -4,7 +4,7 @@
  * @version:
  * @Date: 2023-06-19 22:16:29
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-06-23 12:58:50
+ * @LastEditTime: 2023-06-25 21:52:56
 -->
 
 # 开发笔记
@@ -168,3 +168,5 @@ name 值是过渡动画的前缀
   </router-view>
 </template>
 ```
+
+### 主题色动态切换

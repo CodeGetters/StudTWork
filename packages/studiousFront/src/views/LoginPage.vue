@@ -4,7 +4,7 @@
  * @version:
  * @Date: 2023-06-21 18:10:04
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-06-25 17:08:13
+ * @LastEditTime: 2023-06-25 21:52:07
 -->
 <script setup>
 import { ref, onMounted } from "vue";
@@ -21,25 +21,28 @@ onMounted(() => {
   getRouter(getRouter1);
 });
 
-import { changTheme } from "@/utils/index.js";
+import { changTheme } from "@/utils/index";
+
+import useThemeStore from "../store/theme";
+
+const theme = useThemeStore();
 </script>
 
 <template>
   <div id="loginPage">
-    <!--
-    <div class="login">{{ data }}数据</div>
-    <div class="login">{{ fetData }}</div>
-    <div class="login">{{ getRouter1 }}</div> -->
-
     <el-row class="login-form">
       <el-col :xs="0" :sm="6" :md="12" :lg="12" class="login-left">
         <router-link to="/">
           <button class="button">首页</button>
         </router-link>
-        <button @click="changTheme(false)">切换主题</button>
+
+        <div>{{ theme.isDark }}</div>
+        <button @click="changTheme()">切换主题</button>
       </el-col>
       <el-col :xs="24" :sm="18" :md="12" :lg="12" class="login-right">
-        右边
+        <div class="login">{{ data }}数据</div>
+        <div class="login">{{ fetData }}</div>
+        <div class="login">{{ getRouter1 }}</div>
       </el-col>
     </el-row>
     <div class="footer">
@@ -51,7 +54,7 @@ import { changTheme } from "@/utils/index.js";
         </a>
         &
         <a href="javascript:;">
-          <span>lian</span>
+          <span>泽泽</span>
         </a>
       </div>
     </div>
