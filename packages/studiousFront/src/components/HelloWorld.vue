@@ -4,7 +4,7 @@
  * @version:
  * @Date: 2023-06-18 20:30:52
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-06-23 12:46:47
+ * @LastEditTime: 2023-06-24 18:50:29
 -->
 <script setup>
 defineProps({
@@ -55,13 +55,8 @@ const toggle = () => {
   </p>
   <p class="read-the-docs">Click on the Vite and Vue logos to learn more</p>
 
-  <a href="https://vitejs.dev" target="_blank">
-    <img src="/vite.svg" class="logo" alt="Vite logo" />
-  </a>
   <a href="">HomePage</a>
-  <a href="https://vuejs.org/" target="_blank">
-    <img src="@/assets/vue.svg" class="logo vue" alt="Vue logo" />
-  </a>
+  <img src="@/assets/logo.svg" class="logo vue" alt="Vue logo" />
 
   <el-button :icon="Check" circle />
   <div class="icon">
@@ -112,7 +107,7 @@ div {
     filter: drop-shadow(0 0 2em #646cffaa);
   }
   .logo.vue:hover {
-    filter: drop-shadow(0 0 2em #42b883aa);
+    filter: drop-shadow(0 0 2em #38a7f8);
   }
 }
 </style>

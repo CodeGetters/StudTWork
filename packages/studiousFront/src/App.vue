@@ -1,10 +1,10 @@
 <!--
- * @Descripttion:
+ * @Description:
  * @Author: CodeGetters
  * @version:
  * @Date: 2023-06-19 22:16:29
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-06-23 12:28:14
+ * @LastEditTime: 2023-06-25 15:05:58
 -->
 
 <template>

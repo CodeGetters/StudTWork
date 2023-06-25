@@ -4,7 +4,7 @@
  * @version:
  * @Date: 2023-06-19 22:16:29
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-06-24 17:08:02
+ * @LastEditTime: 2023-06-25 16:43:12
  */
 
 import { defineConfig } from "vite";
@@ -22,6 +22,8 @@ import IconsResolver from "unplugin-icons/resolver";
 import postcssPresetEnv from "postcss-preset-env";
 
 import path, { resolve } from "node:path";
+
+// import { VitePWA } from "vite-plugin-pwa";
 
 // import { viteMockServe } from "vite-plugin-mock";
 
@@ -60,7 +62,7 @@ export default defineConfig({
       less: {
         modifyVars: {
           hack: `true; @import (reference) "${path.resolve(
-            "src/styles/var.less"
+            "src/styles/variables.less"
           )}";`,
         },
         javascriptEnabled: true,
@@ -99,6 +101,29 @@ export default defineConfig({
         }),
       ],
     }),
+    // VitePWA({
+    // registerType: "autoUpdate",
+    // devOptions: {
+    // enabled: true,
+    // },
+    // manifest: {
+    // name: "",
+    // short_name: "",
+    // theme_color: "#fff",
+    // icons: [
+    //   {
+    //     src: "",
+    //     size: "",
+    //     type: "",
+    //   },
+    //   {
+    //     src: "",
+    //     size: "",
+    //     type: "",
+    //   },
+    // ],
+    // },
+    // }),
     // viteMockServe({
     //   // 设置模拟文件的存储文件夹
     //   mockPath: "./mock/",
