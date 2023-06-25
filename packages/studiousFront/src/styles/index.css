@@ -5,7 +5,7 @@
  * @version:
  * @Date: 2023-06-21 15:04:04
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-06-25 17:00:24
+ * @LastEditTime: 2023-06-25 16:34:13
  */
 @font-face {
   font-family: "CascadiaCode";
@@ -19,8 +19,15 @@
   font-weight: normal;
   font-style: normal;
 }
-#app {
+:root {
   font-family: "CascadiaCode", "CascadiaCodeItalic", "微软雅黑";
+}
+:root[theme="dark"] {
+  --bg-color: #000;
+  --text-color: #fff;
+  font-family: "CascadiaCode", "CascadiaCodeItalic", "微软雅黑";
+}
+#app {
   overflow: hidden;
 }
 .fade-enter-from {
@@ -43,11 +50,21 @@
   transform: translateX(100%);
   opacity: 0;
 }
-:root {
-  --textColor: #007fdf;
-  --bgc: linear-gradient(45deg, #c1deff 4.69%, #e0eeff 26.56%, #e5f8fb 87.13%);
-}
-:root[theme="dark"] {
-  --textColor: #fff;
-  --bgc: #000;
-}
+/*
+ * @Description:global less variables
+ * @Description:全局 less 变量
+ * @Author: CodeGetters
+ * @version:
+ * @Date: 2023-06-22 20:58:23
+ * @LastEditors: CodeGetters
+ * @LastEditTime: 2023-06-25 14:56:19
+ */
+/*
+ * @Description-en:less global variables  blight mode
+ * @Description-zh:关于明亮模式的全局 less 变量
+ * @Author: CodeGetters
+ * @version:
+ * @Date: 2023-06-25 11:26:19
+ * @LastEditors: CodeGetters
+ * @LastEditTime: 2023-06-25 14:51:47
+ */

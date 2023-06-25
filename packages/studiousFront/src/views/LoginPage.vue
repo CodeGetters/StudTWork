@@ -1,65 +1,103 @@
 <!--
- * @Descripttion:
+ * @Description:
  * @Author: CodeGetters
  * @version:
  * @Date: 2023-06-21 18:10:04
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-06-23 19:32:54
+ * @LastEditTime: 2023-06-25 17:08:13
 -->
 <script setup>
-import service from "../api";
 import { ref, onMounted } from "vue";
 
-// 发送请求的两种写法
-service
-  .get("/router")
-  .then(function (res) {
-    console.log(res.data);
-  })
-  .catch(function (err) {
-    console.log(err);
-  });
+import { fetchData, getHome, getRouter } from "@/api/login";
 
 const data = ref(null);
-
 const fetData = ref(null);
-
-// 发送请求的两种写法
-const fetchData = async () => {
-  try {
-    const res = await service.get("/");
-    fetData.value = res.data;
-  } catch (err) {
-    console.log(err);
-  }
-};
+const getRouter1 = ref(null);
 
 onMounted(() => {
-  fetchData();
+  fetchData(fetData);
+  getHome(data);
+  getRouter(getRouter1);
 });
 
-service
-  .get("/")
-  .then((res) => {
-    data.value = res.data;
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+import { changTheme } from "@/utils/index.js";
 </script>
 
 <template>
   <div id="loginPage">
-    LoginPage
-    <!-- <router-link to="/"> -->
-    <button class="button">首页</button>
-    <!-- </router-link> -->
+    <!--
     <div class="login">{{ data }}数据</div>
     <div class="login">{{ fetData }}</div>
+    <div class="login">{{ getRouter1 }}</div> -->
+
+    <el-row class="login-form">
+      <el-col :xs="0" :sm="6" :md="12" :lg="12" class="login-left">
+        <router-link to="/">
+          <button class="button">首页</button>
+        </router-link>
+        <button @click="changTheme(false)">切换主题</button>
+      </el-col>
+      <el-col :xs="24" :sm="18" :md="12" :lg="12" class="login-right">
+        右边
+      </el-col>
+    </el-row>
+    <div class="footer">
+      <div><span>隐私内容</span> | <span>政策协议</span></div>
+      <div>
+        Copyright © 2023
+        <a href="javascript:;">
+          <span>JohnsonXin</span>
+        </a>
+        &
+        <a href="javascript:;">
+          <span>lian</span>
+        </a>
+      </div>
+    </div>
   </div>
 </template>
 
 <style scoped lang="less">
+#loginPage {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background: var(--bgc);
+
+  .login-form {
+    width: 730px;
+
+    .login-left {
+      width: 100%;
+      background-color: red;
+    }
+
+    .login-right {
+      width: 100%;
+      background-color: green;
+    }
+  }
+
+  .footer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 175px;
+    user-select: none;
+    color: #007fdf;
+  }
+
+  a {
+    color: #007fdf;
+    text-decoration: none;
+    outline: none;
+  }
+}
 .button {
   color: red;
 }
