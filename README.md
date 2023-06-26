@@ -4,7 +4,7 @@
  * @version:
  * @Date: 2023-06-18 20:30:52
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-06-22 14:06:41
+ * @LastEditTime: 2023-06-26 13:04:24
 -->
 
 # studiousBack
@@ -12,3 +12,15 @@
 Studious blog background management sysytem. 适用于学习的博客后台管理系统
 
 [repo](https://github.com/CodeGetters/studiousBack)
+
+## dev
+
+```shell
+pnpm install
+
+# front
+pnpm dev:front
+
+# back
+pnpm dev:back
+```
