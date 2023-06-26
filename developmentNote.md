@@ -4,7 +4,7 @@
  * @version:
  * @Date: 2023-06-19 22:16:29
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-06-25 21:52:56
+ * @LastEditTime: 2023-06-26 13:20:59
 -->
 
 # 开发笔记
@@ -170,3 +170,78 @@ name 值是过渡动画的前缀
 ```
 
 ### 主题色动态切换
+
+关于主题色的切换，我最初想的是在 variables.less 根据一个 @theme 变量值来条件导入不同的主题文件：
+
+```less
+@theme: true;
+
+@if (@theme=true) {
+  @import url(light.less);
+} @else {
+  @import url(dark.less);
+}
+```
+
+或者是：
+
+```less
+@theme:true;
+
+import "./styles/@{theme}.less";
+```
+
+以上两种都是在 less 文件中使用一个 less 变量来条件引入对应的 less 文件，接着就会引出新的问题---如何改变该对应的全局变量？
+我尝试在一个 .vue 文件中去修改 less 全局变量(当然，在 `style` 标签中没有声明 `scoped` 使得样式隔离)。
+很遗憾的是，由于 less 的原因这样并不能成功来实现条件导入 less 文件。
+
+或许，有伙伴会问为什么你不直接在 App.vue 文件中使用 JS 条件导入全局样式变量。是的，这方面我也考虑过，但我的全局 less 变量是并不是导入在 main.js 中的。
+我是在 vite.config.js 中的 css 统一处理全局变量的，我也尝试过在 App.vue 中引入全局变量文件(vite 已经[内置了 less 的支持](https://cn.vitejs.dev/guide/features.html#css-pre-processors)，就没有使用以往的 less loader)。当然就不清楚该怎么配置使得全局 less 变量能够在 main.js 中统一导入(这样就会报错---[less]:not found xxx variable)。
+
+综合以上的考虑我决定放弃使用条件导入 less 样式变量，而是使用 css3 的特性(也考虑过使用进行条件导入，很遗憾也会报错)：
+
+```less
+root: {
+  @import url(light.less);
+}
+
+:root[theme="dark"] {
+  @import url(dark.less);
+}
+```
+
+最后还是老老实实的使用 css3 吧：
+
+```less
+// 黑白主题变量
+:root {
+  --textColor: #007fdf;
+  --bgc: linear-gradient(45deg, #c1deff 4.69%, #e0eeff 26.56%, #e5f8fb 87.13%);
+}
+
+:root[theme="dark"] {
+  --textColor: #fff;
+  --bgc: #000;
+}
+```
+
+使用 css3 特性主要就是在根节点中添加或移除 class 来达到切换主题的效果，这这样会导致一个弊端---用户无法使用选色板来自定义颜色，这个就后面在使用 JS 看看能不能实现吧
+
+当然在这个实现这个功能的时候也发现了比较好的替代---[vueUse](http://www.vueusejs.com/core/useDark/)，这会导致额外的引入依赖，就放弃用这个的想法。
+以后有时间再试一下这个。
+
+实现了全局 less 变量的切换后，那我们该如何实现切换的功能呢。认真看的小伙伴肯定是知道我是使用一个函数来动态移除或添加类的：
+
+```js
+export const changTheme = (val) => {
+  if (!val) {
+    document.documentElement.setAttribute("theme", "dark");
+  } else {
+    document.documentElement.removeAttribute("theme");
+  }
+};
+```
+
+最开始我是想用 ref 变量传进这个函数里面，并且在这个函数里修改 ref.value 值来实现多次切换主题。后面我就想怎么讲这个持久化，
+我就想到了 pinia 状态管理，将这个变量交给它统一管理。这样不仅不用写多个重复的函数，还能全局管理。真香！😍
+后来看了一下别人的主题切换方案(主题切换持久化---将控制主题的变量存储在浏览器中，每次用户打开进行判断)，这也是后面要实现的目标了。🚀
