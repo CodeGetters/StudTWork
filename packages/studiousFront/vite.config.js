@@ -4,10 +4,10 @@
  * @version:
  * @Date: 2023-06-19 22:16:29
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-06-25 16:43:12
+ * @LastEditTime: 2023-06-27 12:42:44
  */
 
-import { defineConfig } from "vite";
+import { defineConfig, loadEnv } from "vite";
 import vue from "@vitejs/plugin-vue";
 
 import AutoImport from "unplugin-auto-import/vite";
@@ -25,112 +25,124 @@ import path, { resolve } from "node:path";
 
 // import { VitePWA } from "vite-plugin-pwa";
 
-// import { viteMockServe } from "vite-plugin-mock";
-
 // https://vitejs.dev/config/
-export default defineConfig({
-  base: "/",
-  resolve: {
-    alias: {
-      "@": fileURLToPath(new URL("./src", import.meta.url)),
-      "vue-i18n": "vue-i18n/dist/vue-i18n.cjs.js",
-    },
-  },
-  test: {
-    include: ["test/**/*.test.js"],
-    globals: true,
-    deps: {
-      inline: ["@vue", "element-plus"],
-    },
-  },
-  build: {
-    rollupOptions: {
-      // 确保外部化处理不想打包进库的依赖
-      external: ["element-plus"],
-      output: {
-        // 入口文件名
-        entryFileNames: "assets/js/[name].js",
-        // 块文件名
-        chunkFileNames: "assets/js/[name]-[hash].js",
-        // 资源文件名
-        assetFileNames: "assets/[ext]/[name]-[hash]-.[ext]",
+
+export default ({ mode }) => {
+  const VITE_BASE_URL = loadEnv(mode, process.cwd()).VITE_BASE_URL;
+
+  return defineConfig({
+    base: "/",
+    resolve: {
+      alias: {
+        "@": fileURLToPath(new URL("./src", import.meta.url)),
+        "vue-i18n": "vue-i18n/dist/vue-i18n.cjs.js",
       },
     },
-  },
-  css: {
-    preprocessorOptions: {
-      less: {
-        modifyVars: {
-          hack: `true; @import (reference) "${path.resolve(
-            "src/styles/variables.less"
-          )}";`,
+    server: {
+      proxy: {
+        "/api/": {
+          target: VITE_BASE_URL,
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/api/, ""),
         },
-        javascriptEnabled: true,
       },
     },
-    postcss: {
-      plugins: [postcssPresetEnv()],
-    },
-  },
-  plugins: [
-    vue(),
-    AutoImport({
-      resolvers: [ElementPlusResolver()],
-      imports: ["vue", "vue-router", "vue-i18n"],
-      dts: "src/auto-imports.d.ts",
-      dirs: ["src/components", "src/store"],
-      vueTemplate: true,
-    }),
-    Icons({
-      autoInstall: true,
-      compiler: "vue3",
-      customCollections: {
-        home: FileSystemIconLoader("./src/assets/home", (svg) =>
-          svg.replace(/^<svg /, "<svg fill='currentColor' ")
-        ),
+    test: {
+      include: ["test/**/*.test.js"],
+      globals: true,
+      deps: {
+        inline: ["@vue", "element-plus"],
       },
-    }),
-    Components({
-      extensions: ["vue", "md"],
-      dts: "src/components.d.ts",
-      resolvers: [
-        ElementPlusResolver(),
-        IconsResolver({
-          prefix: "icon",
-          enabledCollections: ["home"],
-        }),
-      ],
-    }),
-    // VitePWA({
-    // registerType: "autoUpdate",
-    // devOptions: {
-    // enabled: true,
-    // },
-    // manifest: {
-    // name: "",
-    // short_name: "",
-    // theme_color: "#fff",
-    // icons: [
-    //   {
-    //     src: "",
-    //     size: "",
-    //     type: "",
-    //   },
-    //   {
-    //     src: "",
-    //     size: "",
-    //     type: "",
-    //   },
-    // ],
-    // },
-    // }),
-    // viteMockServe({
-    //   // 设置模拟文件的存储文件夹
-    //   mockPath: "./mock/",
-    //   // 是否启用 mock 功能
-    //   enable: true,
-    //   supportTs: false,
-    //   logger: false,
-    // }),
-  ],
-});
+    },
+    build: {
+      rollupOptions: {
+        // 确保外部化处理不想打包进库的依赖
+        external: ["element-plus"],
+        output: {
+          // 入口文件名
+          entryFileNames: "assets/js/[name].js",
+          // 块文件名
+          chunkFileNames: "assets/js/[name]-[hash].js",
+          // 资源文件名
+          assetFileNames: "assets/[ext]/[name]-[hash]-.[ext]",
+        },
+      },
+    },
+    css: {
+      preprocessorOptions: {
+        less: {
+          modifyVars: {
+            hack: `true; @import (reference) "${path.resolve(
+              "src/styles/variables.less"
+            )}";`,
+          },
+          javascriptEnabled: true,
+        },
+      },
+      postcss: {
+        plugins: [postcssPresetEnv()],
+      },
+    },
+    plugins: [
+      vue(),
+      AutoImport({
+        resolvers: [ElementPlusResolver()],
+        imports: ["vue", "vue-router", "vue-i18n"],
+        dts: "src/auto-imports.d.ts",
+        dirs: ["src/components", "src/store"],
+        vueTemplate: true,
+      }),
+      Icons({
+        autoInstall: true,
+        compiler: "vue3",
+        customCollections: {
+          home: FileSystemIconLoader("./src/assets/home", (svg) =>
+            svg.replace(/^<svg /, "<svg fill='currentColor' ")
+          ),
+        },
+      }),
+      Components({
+        extensions: ["vue", "md"],
+        dts: "src/components.d.ts",
+        resolvers: [
+          ElementPlusResolver(),
+          IconsResolver({
+            prefix: "icon",
+            enabledCollections: ["home"],
+          }),
+        ],
+      }),
+      // VitePWA({
+      // registerType: "autoUpdate",
+      // devOptions: {
+      // enabled: true,
+      // },
+      // manifest: {
+      // name: "",
+      // short_name: "",
+      // theme_color: "#fff",
+      // icons: [
+      //   {
+      //     src: "",
+      //     size: "",
+      //     type: "",
+      //   },
+      //   {
+      //     src: "",
+      //     size: "",
+      //     type: "",
+      //   },
+      // ],
+      // },
+      // }),
+      // viteMockServe({
+      //   // 设置模拟文件的存储文件夹
+      //   mockPath: "./mock/",
+      //   // 是否启用 mock 功能
+      //   enable: true,
+      //   supportTs: false,
+      //   logger: false,
+      // }),
+    ],
+  });
+};

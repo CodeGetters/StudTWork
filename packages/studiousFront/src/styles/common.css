@@ -5,7 +5,7 @@
  * @version:
  * @Date: 2023-06-21 15:04:04
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-06-25 17:00:24
+ * @LastEditTime: 2023-06-26 20:43:59
  */
 @font-face {
   font-family: "CascadiaCode";
@@ -46,8 +46,12 @@
 :root {
   --textColor: #007fdf;
   --bgc: linear-gradient(45deg, #c1deff 4.69%, #e0eeff 26.56%, #e5f8fb 87.13%);
+  --form-right-bgc: #fff;
+  --form-left-bgc: #f3fafd;
 }
 :root[theme="dark"] {
   --textColor: #fff;
-  --bgc: #000;
+  --bgc: #152337;
+  --form-right-bgc: #152337;
+  --form-left-bgc: #152337;
 }

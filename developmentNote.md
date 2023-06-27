@@ -4,7 +4,7 @@
  * @version:
  * @Date: 2023-06-19 22:16:29
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-06-26 13:20:59
+ * @LastEditTime: 2023-06-27 13:40:02
 -->
 
 # 开发笔记
@@ -245,3 +245,86 @@ export const changTheme = (val) => {
 最开始我是想用 ref 变量传进这个函数里面，并且在这个函数里修改 ref.value 值来实现多次切换主题。后面我就想怎么讲这个持久化，
 我就想到了 pinia 状态管理，将这个变量交给它统一管理。这样不仅不用写多个重复的函数，还能全局管理。真香！😍
 后来看了一下别人的主题切换方案(主题切换持久化---将控制主题的变量存储在浏览器中，每次用户打开进行判断)，这也是后面要实现的目标了。🚀
+
+### 开发环境下 Mock 数据
+
+在增加 mock 来实现请求拦截模拟数据时，最初在 bing 中看到最多的还是 mock + vite-plugin-mock 配合使用。但是我使用这个方案时发现会报错：
+
+```js
+export default [
+  {
+    url: '/mock/api/getList',
+    method: 'post',
+    response: () => {
+      return logList;
+    },
+  },
+  {
+    url: '/mock/api/getStatusList',
+    method: 'get',
+    response: () => {
+      return statusList;
+    },
+  },
+] as MockMethod[];
+```
+
+报错信息：mock/index.js:20:2: ERROR: Expected ";" but found "as"。因为对这个问题有些表示无从下手，我只好放弃使用该方案，老老实实使用 mock。
+只使用 mock 无需在 vite.config.js 中配置，只需在 `src` 下新建 mock 目录，并将 mock 导入到 main.js 中
+
+```js
+// mock.js
+import Mock from "mockjs";
+
+// 获取环境变量
+let BaseURL = import.meta.env.VITE_BASE_URL;
+
+// 如果是生产环境取消模拟数据
+if (import.meta.env.MODE === "production") {
+  BaseURL = "";
+}
+
+Mock.mock(BaseURL + "/", "get", {
+  status: 200,
+  data: "Mock successful!",
+});
+
+Mock.mock(BaseURL + "/router", "get", {
+  status: 200,
+  data: {
+    name: "@cname",
+    info: "Mock successful!",
+  },
+});
+
+// main.js
+import "@/mock/index";
+```
+
+这里需要注意一点：由于 mock 没有像 vite-plugin-mock 一样能够根据模式不同而避免打包我们的 mock 文件，所以这里需要判断开发环境还是生产环境来避免生产环境下拦截请求和模拟数据。
+
+当然，这并不是一帆风顺的，由于我的请求地址都放在了 .env 文件中，所以我需要从环境变量文件中拿到请求地址。
+同时，我还需要判断开发环境和生产环境，因为生产环境是不需要 mock 拦截请求和模拟数据的。所以我重新配置了一下 vite.config.js，让 vite 能够根据模式不同而读取地址。
+
+```js
+// vite.config.js
+export default ({ mode }) => {
+  const VITE_BASE_URL = loadEnv(mode, process.cwd()).VITE_BASE_URL;
+
+  return defineConfig({
+    base: "/",
+    // ...
+    server: {
+      proxy: {
+        "/api/": {
+          target: VITE_BASE_URL,
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/api/, ""),
+        },
+      },
+    },
+  });
+};
+```
+
+需要注意的是：[Vite 会根据模式不同来读取 env 文件](https://cn.vitejs.dev/guide/env-and-mode.html#env-files)

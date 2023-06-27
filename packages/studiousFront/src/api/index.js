@@ -1,5 +1,5 @@
 /*
- * @Descripttion: axios 封装
+ * @Description: axios 的封装
  * @Author: CodeGetters
  * @version:
  * @Date: 2023-06-21 14:39:04
