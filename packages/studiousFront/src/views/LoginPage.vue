@@ -1,10 +1,11 @@
 <!--
- * @Description:
+ * @Description-en:Login Page
+ * @Description-zh:登录页
  * @Author: CodeGetters
  * @version:
  * @Date: 2023-06-21 18:10:04
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-06-25 21:52:07
+ * @LastEditTime: 2023-06-27 12:38:56
 -->
 <script setup>
 import { ref, onMounted } from "vue";
@@ -20,6 +21,8 @@ onMounted(() => {
   getHome(data);
   getRouter(getRouter1);
 });
+
+console.log("mode：", import.meta.env.MODE);
 
 import { changTheme } from "@/utils/index";
 
@@ -46,7 +49,10 @@ const theme = useThemeStore();
       </el-col>
     </el-row>
     <div class="footer">
-      <div><span>隐私内容</span> | <span>政策协议</span></div>
+      <div>
+        <a href="javascript:;"><span>隐私内容</span></a> |
+        <a href="javascript:;"><span>政策协议</span></a>
+      </div>
       <div>
         Copyright © 2023
         <a href="javascript:;">
@@ -72,25 +78,32 @@ const theme = useThemeStore();
   background: var(--bgc);
 
   .login-form {
-    width: 730px;
+    width: 67%;
+    height: 74%;
+    margin: auto;
+    margin-bottom: 0;
+    border-radius: 10px;
+    overflow: hidden;
 
     .login-left {
       width: 100%;
-      background-color: red;
+      background-color: var(--form-left-bgc);
     }
-
     .login-right {
       width: 100%;
-      background-color: green;
+      background-color: var(--form-right-bgc);
+      .login {
+        color: var(--textColor);
+      }
     }
   }
-
   .footer {
     width: 100%;
     display: flex;
     align-items: center;
     flex-direction: column;
-    margin-top: 175px;
+    margin-top: 5.2%;
+    margin-bottom: 30px;
     user-select: none;
     color: #007fdf;
   }
