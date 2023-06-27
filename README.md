@@ -27,6 +27,6 @@ pnpm dev:back
 # build
 pnpm build:front
 
-# or you just want to build mock dat
-
+# or you just want to build with mock data
+pnpm build:front-mock
 ```
