@@ -11,6 +11,7 @@
     "dev:lint": "pnpm -F @studious/front lint & pnpm -F @studious/back lint",
     "dev:format": "pnpm -F @studious/front format& pnpm -F @studious/back format",
     "build:front": "pnpm -F @studious/front build",
+    "build:front-mock": "pnpm -F @studious/front build:mock",
     "preview": "pnpm -F @studious/front preview",
     "lint": "eslint . --ext .vue,.js,.ts,.jsx,.tsx --fix",
     "format": "prettier --write ./**/*.{vue,ts,tsx,js,jsx,css,less,scss,json,md}",

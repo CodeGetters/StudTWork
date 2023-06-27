@@ -23,6 +23,6 @@ dist-ssr
 *.sln
 *.sw?
 
-.env
-.env.development
-.env.production
+# .env
+# .env.development
+# .env.production
