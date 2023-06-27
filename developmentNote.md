@@ -4,7 +4,7 @@
  * @version:
  * @Date: 2023-06-19 22:16:29
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-06-27 13:40:02
+ * @LastEditTime: 2023-06-27 13:59:07
 -->
 
 # 开发笔记
@@ -328,3 +328,9 @@ export default ({ mode }) => {
 ```
 
 需要注意的是：[Vite 会根据模式不同来读取 env 文件](https://cn.vitejs.dev/guide/env-and-mode.html#env-files)
+
+同时，我还在 package.js 中增加了有 mock 数据的打包命令
+
+```js
+pnpm build:front-mock
+```
