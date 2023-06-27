@@ -5,7 +5,7 @@
  * @version:
  * @Date: 2023-06-24 17:11:59
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-06-27 12:57:46
+ * @LastEditTime: 2023-06-27 13:01:24
  */
 import Mock from "mockjs";
 
@@ -18,10 +18,6 @@ if (import.meta.env.MODE === "production") {
 
 Mock.mock(BaseURL + "/", "get", {
   status: 200,
-  // data: {
-  //   name: "@cname",
-  //   info: "Mock successful!",
-  // },
   data: "Mock successful!",
 });
 
