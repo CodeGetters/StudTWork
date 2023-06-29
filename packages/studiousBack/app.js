@@ -4,10 +4,11 @@
  * @version:
  * @Date: 2023-06-18 20:30:52
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-06-23 19:12:33
+ * @LastEditTime: 2023-06-29 23:09:19
  */
 const koa = require("koa");
 const cors = require("koa-cors");
+const port = require("./src/config/globalConfig").port;
 
 // https://github.com/koajs/convert/blob/master/README.md
 // https://github.com/koajs/convert#migration
@@ -15,7 +16,7 @@ const cors = require("koa-cors");
 
 const app = new koa();
 
-const Router = require("./router/index");
+const Router = require("./src/router/index");
 
 app.use(cors());
 
@@ -42,4 +43,6 @@ app.use(async (ctx) => {
 
 app.use(Router.routes(), Router.allowedMethods());
 
-app.listen(5000);
+app.listen(port);
+
+console.log(`http://127.0.0.1:${5000}`);
