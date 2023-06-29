@@ -1,10 +1,10 @@
 /*
- * @Descripttion:
+ * @Description:
  * @Author: CodeGetters
  * @version:
  * @Date: 2023-06-23 21:44:59
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-06-24 16:04:13
+ * @LastEditTime: 2023-06-28 16:42:15
  */
 import { describe, expect, it, test } from "vitest";
 

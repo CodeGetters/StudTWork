@@ -1,10 +1,10 @@
 /*
- * @Descripttion:app 请求响应主体
+ * @Description:app 请求响应主体
  * @Author: CodeGetters
  * @version:
  * @Date: 2023-06-18 20:30:52
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-06-23 19:12:33
+ * @LastEditTime: 2023-06-29 22:01:35
  */
 const koa = require("koa");
 const cors = require("koa-cors");
@@ -15,9 +15,11 @@ const cors = require("koa-cors");
 
 const app = new koa();
 
-const Router = require("./router/index");
+// const Router = require("./router/index");
 
 app.use(cors());
+
+const port = 5000;
 
 // X-Response-Time
 app.use(async (ctx, next) => {
@@ -40,6 +42,8 @@ app.use(async (ctx) => {
   ctx.body = "hello woeld";
 });
 
-app.use(Router.routes(), Router.allowedMethods());
+// app.use(Router.routes(), Router.allowedMethods());
 
-app.listen(5000);
+app.listen(port);
+
+console.log(`启动成功！服务地址为：https://127.0.0.1:${port}`);

@@ -4,7 +4,7 @@
  * @version:
  * @Date: 2023-06-19 22:16:29
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-06-27 13:59:07
+ * @LastEditTime: 2023-06-29 10:34:13
 -->
 
 # 开发笔记
@@ -129,7 +129,9 @@ css: {
 
 以上是配置 less 全局变量两个方法一个是引入外部的全局变量，是就在之这里直接声明使用
 
-### 打包后文件整理归类
+### 静态资源合并打包
+
+[相关文章](https://blog.csdn.net/shinjie1210/article/details/122473024)
 
 这里是通过 rollup 配置将打包后的文件进行一个文件整理，比如 js 文件会放在 js 文件夹中，css 文件会放在 css 文件夹中...
 

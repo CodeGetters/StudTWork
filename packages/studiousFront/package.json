@@ -3,6 +3,11 @@
   "private": true,
   "version": "0.0.0",
   "author": "CodeGetters",
+  "keywords": [
+    "stuTwork",
+    "frontend",
+    "blog"
+  ],
   "scripts": {
     "dev": "vite --open --port 4000",
     "build": "vite build",
@@ -33,6 +38,7 @@
     "unplugin-icons": "^0.16.3",
     "unplugin-vue-components": "^0.25.1",
     "vite": "^4.3.9",
+    "vite-plugin-compression": "^0.5.1",
     "vite-plugin-pwa": "^0.16.4",
     "vitest": "^0.32.2"
   }
