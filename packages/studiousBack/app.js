@@ -1,10 +1,10 @@
 /*
- * @Descripttion:app 请求响应主体
+ * @Description:app 请求响应主体
  * @Author: CodeGetters
  * @version:
  * @Date: 2023-06-18 20:30:52
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-06-29 23:45:36
+ * @LastEditTime: 2023-06-29 23:47:45
  */
 const koa = require("koa");
 const cors = require("koa-cors");

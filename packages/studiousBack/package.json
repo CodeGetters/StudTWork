@@ -10,7 +10,7 @@
     "format": "prettier --write ./**/*.{vue,ts,tsx,js,jsx,css,less,scss,json,md}"
   },
   "keywords": [
-    "stutwork",
+    "stuTwork",
     "backend",
     "blog",
     "koa"
