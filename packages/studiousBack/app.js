@@ -4,7 +4,7 @@
  * @version:
  * @Date: 2023-06-18 20:30:52
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-06-29 23:09:19
+ * @LastEditTime: 2023-06-29 23:45:36
  */
 const koa = require("koa");
 const cors = require("koa-cors");
@@ -45,4 +45,4 @@ app.use(Router.routes(), Router.allowedMethods());
 
 app.listen(port);
 
-console.log(`http://127.0.0.1:${5000}`);
+console.log(`http://127.0.0.1:${port}`);
