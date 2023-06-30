@@ -1,12 +1,3 @@
-<!--
- * @Descripttion:
- * @Author: CodeGetters
- * @version:
- * @Date: 2023-06-22 13:33:40
- * @LastEditors: CodeGetters
- * @LastEditTime: 2023-06-24 15:26:23
--->
-
 # resolve Bug
 
 这里主要会列一些项目中遇到的 bug，以便后面查看
