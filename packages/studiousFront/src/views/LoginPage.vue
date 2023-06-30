@@ -5,7 +5,7 @@
  * @version:
  * @Date: 2023-06-21 18:10:04
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-06-30 21:47:33
+ * @LastEditTime: 2023-06-30 23:43:01
 -->
 <script setup>
 import { ref, onMounted } from "vue";
@@ -24,7 +24,7 @@ onMounted(() => {
 
 console.log("mode：", import.meta.env.MODE);
 
-import { changTheme } from "@/utils/index";
+import { changeTheme } from "@/utils/index";
 
 import useThemeStore from "../store/theme";
 
@@ -88,19 +88,37 @@ const submitForm = (formName) => {
 //     }
 //   });
 // });
+
+// 国际化
+import i18n from "@/i18n/index.js";
+
+// TODO:语言切换持久全局化
+import { useI18n } from "vue-i18n";
+const { locale } = useI18n();
+
+console.log("i18n:", i18n);
+
+const changeLang = () => {
+  console.log("locale.value:", locale.value);
+  locale.value === "zh-cn"
+    ? (locale.value = "en-us")
+    : (locale.value = "zh-cn");
+};
+
+// console.log("中文：", i18n.global.t("loginPage.logoDesc"));
 </script>
 
 <template>
   <div id="loginPage">
+    <button @click="changeTheme()">切换主题</button>
+
+    <button @click="changeLang()">切换语言</button>
+    <div class="login">{{ data }}数据</div>
+    <div class="login">{{ fetData }}</div>
+    <div class="login">{{ getRouter1 }}</div>
     <el-row class="login-form">
       <el-col :xs="0" :sm="6" :md="12" :lg="12" class="login-left">
-        <!-- <router-link to="/">
-          <button class="button">首页</button>
-        </router-link>
-
         <div>{{ theme.isDark }}</div>
-        <button @click="changTheme()">切换主题</button> -->
-        <button @click="changTheme()">切换主题</button>
         <div class="logo-con">
           <div class="logo-box">
             <div class="logo">
@@ -108,15 +126,12 @@ const submitForm = (formName) => {
             </div>
             <div class="logo-English">StudTWork</div>
           </div>
-          <div class="logo-des">学 生 用 功 团 队 协 作</div>
+          <div class="logo-des">{{ $t("loginPage.logoDesc") }}</div>
         </div>
       </el-col>
       <el-col :xs="24" :sm="18" :md="12" :lg="12" class="login-right">
-        <!-- <div class="login">{{ data }}数据</div>
-        <div class="login">{{ fetData }}</div>
-        <div class="login">{{ getRouter1 }}</div> -->
         <div class="login-form-container">
-          <h1>登录</h1>
+          <h1>{{ $t("loginPage.loginTitle") }}</h1>
           <div class="login-form-right-con">
             <el-form
               :model="ruleForm"
@@ -126,36 +141,39 @@ const submitForm = (formName) => {
               label-width="100px"
               class="login-user-info"
             >
-              <el-form-item label="账号" prop="account">
+              <el-form-item :label="$t('loginPage.account')" prop="account">
                 <el-input
                   type="account"
                   v-model="ruleForm.account"
                   autocomplete="off"
-                  placeholder="请输入用户名/手机号/邮箱号"
+                  :placeholder="$t('loginPage.accountIpt')"
                 ></el-input>
               </el-form-item>
-              <el-form-item label="密码" prop="pass">
+              <el-form-item :label="$t('loginPage.password')" prop="pass">
                 <el-input
                   type="password"
                   v-model="ruleForm.pass"
                   autocomplete="off"
-                  placeholder="请输入密码"
+                  :placeholder="$t('loginPage.passwordIpt')"
                 ></el-input>
               </el-form-item>
               <router-link to="" class="forget-pwd">
-                <span>忘记密码</span>
+                <span>{{ $t("loginPage.forgetPwd") }}</span>
               </router-link>
-              <el-button type="primary" @click="submitForm('ruleForm')"
-                >登录</el-button
-              >
+              <el-button type="primary" @click="submitForm('ruleForm')">{{
+                $t("loginPage.loginForm")
+              }}</el-button>
             </el-form>
             <div class="other-platform-login">
-              <el-divider content-position="center">其他登陆方式</el-divider>
+              <el-divider content-position="center">{{
+                $t("loginPage.otherPlatform")
+              }}</el-divider>
               <div class="icon-group">
                 <div class="icon"></div>
               </div>
               <div class="go-register">
-                没有账号， <router-link to="">去注册</router-link>
+                {{ $t("loginPage.noAccount") }}，
+                <router-link to="">{{ $t("loginPage.register") }}</router-link>
               </div>
             </div>
           </div>
@@ -164,8 +182,13 @@ const submitForm = (formName) => {
     </el-row>
     <div class="footer">
       <div>
-        <a href="javascript:;"><span>隐私内容</span></a> |
-        <a href="javascript:;"><span>政策协议</span></a>
+        <a href="javascript:;"
+          ><span>{{ $t("loginPage.privateCon") }}</span></a
+        >
+        |
+        <a href="javascript:;"
+          ><span>{{ $t("loginPage.policyAgree") }}</span></a
+        >
       </div>
       <div>
         Copyright © 2023
