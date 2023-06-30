@@ -11,11 +11,11 @@ const defineConfig = {
   port: 5000,
   dataBase: {
     port: 3306,
-    user: "root",
+    username: "root",
     password: "MySQL123456!",
     host: "localhost",
     dialect: "mysql",
-    database: "stuTwork",
+    database: "studTwork",
   },
 };
 

@@ -19,3 +19,7 @@ $ tree -I 'node_modules'
 
 jsonwebtoken---生成 token
 koa-jwt---对 jsonwebtoken 的进一步封装，实现检验
+
+## realize koa2
+
+[参考](https://juejin.cn/post/7125867746172076069#heading-13)
