@@ -1,10 +1,10 @@
 <!--
- * @Descripttion: 示例组件
+ * @Description: 示例组件
  * @Author: CodeGetters
  * @version:
  * @Date: 2023-06-18 20:30:52
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-06-24 18:50:29
+ * @LastEditTime: 2023-06-30 22:23:39
 -->
 <script setup>
 defineProps({
@@ -25,6 +25,7 @@ console.log("中文：", i18n.global.t("language.zh"));
 const lang = ref("zh-cn");
 import zhCN from "element-plus/dist/locale/zh-cn.mjs";
 import en from "element-plus/dist/locale/en.mjs";
+
 const locale = computed(() => (lang.value === "zh-cn" ? zhCN : en));
 const toggle = () => {
   lang.value = lang.value === "zh-cn" ? "en" : "zh-cn";
