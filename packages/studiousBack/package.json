@@ -30,6 +30,7 @@
   },
   "devDependencies": {
     "eslint": "^8.43.0",
-    "koa-body": "^6.0.1"
+    "koa-body": "^6.0.1",
+    "kolorist": "^1.8.0"
   }
 }
