@@ -5,7 +5,7 @@
  * @version:
  * @Date: 2023-06-21 18:10:04
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-07-01 19:13:45
+ * @LastEditTime: 2023-07-01 23:00:07
 -->
 <script setup>
 import { ref, h } from "vue";
@@ -115,14 +115,7 @@ const notification = (type) => {
         <div class="login-form-container">
           <h1>{{ $t("loginPage.loginTitle") }}</h1>
           <div class="login-form-right-con">
-            <el-form
-              :model="ruleForm"
-              status-icon
-              :rules="rules"
-              :ref="ruleForm"
-              label-width="100px"
-              class="login-user-info"
-            >
+            <el-form label-width="100px" class="login-user-info">
               <el-form-item :label="$t('loginPage.account')" prop="account">
                 <el-input
                   type="account"
@@ -146,6 +139,7 @@ const notification = (type) => {
                 $t("loginPage.loginForm")
               }}</el-button>
             </el-form>
+
             <div class="other-platform-login">
               <el-divider content-position="center">{{
                 $t("loginPage.otherPlatform")

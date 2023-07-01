@@ -27,7 +27,7 @@ import viteCompression from "vite-plugin-compression";
 
 import { VitePWA } from "vite-plugin-pwa";
 
-import VueDevTools from "vite-plugin-vue-devtools";
+// import VueDevTools from "vite-plugin-vue-devtools";
 
 // https://vitejs.dev/config/
 
@@ -108,7 +108,7 @@ export default ({ mode }) => {
     plugins: [
       vue(),
       // https://github.com/webfansplz/vite-plugin-vue-devtools
-      VueDevTools(),
+      // VueDevTools(),
       // https://github.com/antfu/unplugin-auto-import
       AutoImport({
         resolvers: [ElementPlusResolver()],

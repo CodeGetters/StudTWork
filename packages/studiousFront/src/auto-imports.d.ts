@@ -20,7 +20,6 @@ declare global {
   const isReactive: typeof import("vue")["isReactive"];
   const isReadonly: typeof import("vue")["isReadonly"];
   const isRef: typeof import("vue")["isRef"];
-  const lang: typeof import("./store/lang.js")["default"];
   const markRaw: typeof import("vue")["markRaw"];
   const nextTick: typeof import("vue")["nextTick"];
   const onActivated: typeof import("vue")["onActivated"];
@@ -85,9 +84,6 @@ import { UnwrapRef } from "vue";
 declare module "vue" {
   interface ComponentCustomProperties {
     readonly EffectScope: UnwrapRef<typeof import("vue")["EffectScope"]>;
-    readonly ElNotification: UnwrapRef<
-      typeof import("element-plus/es")["ElNotification"]
-    >;
     readonly computed: UnwrapRef<typeof import("vue")["computed"]>;
     readonly createApp: UnwrapRef<typeof import("vue")["createApp"]>;
     readonly customRef: UnwrapRef<typeof import("vue")["customRef"]>;
@@ -184,9 +180,6 @@ declare module "vue" {
 declare module "@vue/runtime-core" {
   interface ComponentCustomProperties {
     readonly EffectScope: UnwrapRef<typeof import("vue")["EffectScope"]>;
-    readonly ElNotification: UnwrapRef<
-      typeof import("element-plus/es")["ElNotification"]
-    >;
     readonly computed: UnwrapRef<typeof import("vue")["computed"]>;
     readonly createApp: UnwrapRef<typeof import("vue")["createApp"]>;
     readonly customRef: UnwrapRef<typeof import("vue")["customRef"]>;
