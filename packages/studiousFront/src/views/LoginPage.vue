@@ -5,13 +5,13 @@
  * @version:
  * @Date: 2023-06-21 18:10:04
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-07-01 18:06:31
+ * @LastEditTime: 2023-07-01 18:12:32
 -->
 <script setup>
 import { ref, onMounted } from "vue";
 import i18n from "@/i18n";
 import { changeTheme } from "@/utils/index";
-import { fetchData, getHome, getLogin } from "@/api/user";
+import { getLogin } from "@/api/user";
 
 // TODO:语言切换持久全局化
 import { useI18n } from "vue-i18n";
@@ -78,15 +78,6 @@ const submitForm = async () => {
   }
 };
 
-// const fetData = ref(null);
-// const getRouter1 = ref(null);
-
-// onMounted(() => {
-//   fetchData(fetData);
-//   getHome(data);
-//   getRouter(getRouter1);
-// });
-
 // console.log("mode：", import.meta.env.MODE);
 </script>
 
@@ -95,7 +86,6 @@ const submitForm = async () => {
     <button @click="changeTheme()">切换主题</button>
 
     <button @click="changeLang()">切换语言</button>
-    <div>{{ getLogin }}</div>
     <el-row class="login-form">
       <el-col :xs="0" :sm="0" :md="12" :lg="12" class="login-left">
         <div class="logo-con">
@@ -292,12 +282,12 @@ const submitForm = async () => {
             flex-direction: column;
             width: 100%;
             height: 64%;
-            margin-bottom: 3%;
+            margin-bottom: 2%;
 
             .forget-pwd {
               display: flex;
               height: 7%;
-              margin: 4% 0;
+              margin: 2% 0;
               font-size: 12px;
               align-items: center;
               justify-content: flex-end;
