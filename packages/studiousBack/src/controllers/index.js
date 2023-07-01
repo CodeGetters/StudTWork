@@ -5,7 +5,7 @@
  * @version:
  * @Date: 2023-06-29 23:30:08
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-07-01 08:29:21
+ * @LastEditTime: 2023-07-01 11:20:37
  */
 
 // controller 主要负责对数据库进行操作
@@ -13,9 +13,8 @@
 
 // 定一个公共类，类里有一个 renderJsonSuccess 方法，方便返回数据
 class baseController {
-  static renderJsonSuccess(code = 200, msg = "", data = []) {
+  static renderJsonSuccess(msg = "", data = []) {
     return {
-      code,
       msg,
       data,
     };

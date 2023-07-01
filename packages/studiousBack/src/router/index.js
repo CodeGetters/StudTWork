@@ -5,7 +5,7 @@
  * @version:
  * @Date: 2023-06-23 17:58:01
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-07-01 10:03:38
+ * @LastEditTime: 2023-07-01 12:18:54
  */
 const Router = require("@koa/router");
 
@@ -26,7 +26,7 @@ router
   // 用户注册
   .post("/user/register", userController.createUser)
   // 用户登录
-  // .post("/user/login", userController)
+  .post("/user/login", userController.userLogin)
   // 获取所有用户
   .get("/user", userController.getUser);
 // 删除用户
@@ -34,7 +34,7 @@ router
 /* -------------------------------------------------------- */
 // 封装后的路由，用 controller 控制
 // router.get("/user", userController.getUser);
-router.get("/detail/:id", userController.getUserDetail);
+// router.get("/detail/:id", userController.getUserDetail);
 /* -------------------------------------------------------- */
 
 router.get("/user/:id", async (ctx, next) => {
