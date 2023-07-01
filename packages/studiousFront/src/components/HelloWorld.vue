@@ -4,7 +4,7 @@
  * @version:
  * @Date: 2023-06-18 20:30:52
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-06-30 22:23:39
+ * @LastEditTime: 2023-07-01 07:30:38
 -->
 <script setup>
 defineProps({
@@ -71,7 +71,7 @@ const toggle = () => {
 
   <router-link to="/login"><button>LOGIN</button></router-link>
 
-  <!-- elelment：国际化示例 -->
+  <!-- element：国际化示例 -->
   <!-- <div>
     <el-button mb-2 @click="toggle">Switch Language</el-button>
     <br />

@@ -1,27 +1,48 @@
 /*
- * @Description-en:
- * @Description-zh:
+ * @Description-en:user controller
+ * @Description-zh:用户中间层
  * @Author: CodeGetters
  * @version:
  * @Date: 2023-06-29 23:29:57
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-06-30 11:53:19
+ * @LastEditTime: 2023-07-01 10:39:35
  */
 const baseController = require("./index");
 
 const userModel = require("../models/user");
 
 class userController extends baseController {
-  static async getUser(ctx) {
-    const res = await userModel.findAll({
-      // 限制
-      // where: {
-      // status: 1,
-      // },
-      // 分页
-      // limit: 1,
+  // 创建用户
+  static async createUser(ctx) {
+    let msg = "创建成功";
+    let code = 200;
+    const { userName, pwd } = ctx.request.body;
+
+    const isExist = await userModel.findOne({
+      where: {
+        userName,
+      },
     });
-    ctx.body = baseController.renderJsonSuccess(200, res);
+
+    // 检验是否存在
+    if (isExist) {
+      msg = "用户已经存在，创建失败";
+      code = 400;
+    } else {
+      console.log("用户不存在，可以创建");
+      userModel.create({
+        userName,
+        pwd,
+      });
+    }
+
+    ctx.body = baseController.renderJsonSuccess(code, msg);
+  }
+
+  // 获取用户信息
+  static async getUser(ctx) {
+    const res = await userModel.findByPk("");
+    ctx.body = baseController.renderJsonSuccess(200, "查找成功", res);
   }
 
   static async getUserDetail(ctx) {

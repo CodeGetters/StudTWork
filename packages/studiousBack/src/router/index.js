@@ -1,10 +1,11 @@
 /*
- * @Description:
+ * @Description-en:global router
+ * @Description-zh:全局路由
  * @Author: CodeGetters
  * @version:
  * @Date: 2023-06-23 17:58:01
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-06-30 11:35:35
+ * @LastEditTime: 2023-07-01 10:03:38
  */
 const Router = require("@koa/router");
 
@@ -21,10 +22,20 @@ router.get("/router", async (ctx, next) => {
   return next();
 });
 
+router
+  // 用户注册
+  .post("/user/register", userController.createUser)
+  // 用户登录
+  // .post("/user/login", userController)
+  // 获取所有用户
+  .get("/user", userController.getUser);
+// 删除用户
+// .post("/user/delete", userController);
+/* -------------------------------------------------------- */
 // 封装后的路由，用 controller 控制
-router.get("/user", userController.getUser);
+// router.get("/user", userController.getUser);
 router.get("/detail/:id", userController.getUserDetail);
-// --------------------------------------------------------
+/* -------------------------------------------------------- */
 
 router.get("/user/:id", async (ctx, next) => {
   const id = ctx.params.id;
