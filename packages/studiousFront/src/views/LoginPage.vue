@@ -5,10 +5,10 @@
  * @version:
  * @Date: 2023-06-21 18:10:04
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-07-01 18:12:32
+ * @LastEditTime: 2023-07-01 19:13:45
 -->
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, h } from "vue";
 import i18n from "@/i18n";
 import { changeTheme } from "@/utils/index";
 import { getLogin } from "@/api/user";
@@ -25,7 +25,6 @@ const changeLang = () => {
 };
 
 const isRight = ref(false);
-const loginRes = ref(null);
 
 // 表单
 const ruleForm = ref({
@@ -38,9 +37,10 @@ const regexpCheck = (rule, value, callback) => {
 
   if (!regexp.test(value)) {
     return callback(new Error(`${i18n.global.t("loginPage.verifyInfo")}`));
+  } else {
+    isRight.value = true;
+    callback();
   }
-  isRight.value = true;
-  callback();
 };
 
 const rules = ref({
@@ -72,10 +72,23 @@ const submitForm = async () => {
     };
     getLogin(isRight);
     console.log("登录成功");
-  } else {
-    // TODO：错误提示
-    console.log("请填写账号密码！");
+    notification("success");
   }
+  if (ruleForm.value.account === "" || ruleForm.value.pass === "") {
+    notification("error");
+  }
+};
+
+const notification = (type) => {
+  ElNotification({
+    title: "消息提示",
+    message: h(
+      "i",
+      { style: "color: #409eff" },
+      type === "success" ? `欢迎回来 ${ruleForm.value.account}` : "登录失败"
+    ),
+    type,
+  });
 };
 
 // console.log("mode：", import.meta.env.MODE);
