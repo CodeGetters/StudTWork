@@ -5,16 +5,27 @@
  * @version:
  * @Date: 2023-06-21 18:10:04
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-07-01 16:38:33
+ * @LastEditTime: 2023-07-01 18:06:31
 -->
 <script setup>
 import { ref, onMounted } from "vue";
 import i18n from "@/i18n";
 import { changeTheme } from "@/utils/index";
+import { fetchData, getHome, getLogin } from "@/api/user";
 
-const data = ref(null);
+// TODO:语言切换持久全局化
+import { useI18n } from "vue-i18n";
+const { locale } = useI18n();
+
+const changeLang = () => {
+  console.log("locale.value:", locale.value);
+  locale.value === "zh-cn"
+    ? (locale.value = "en-us")
+    : (locale.value = "zh-cn");
+};
 
 const isRight = ref(false);
+const loginRes = ref(null);
 
 // 表单
 const ruleForm = ref({
@@ -52,22 +63,20 @@ const rules = ref({
 // 提交表单
 const submitForm = async () => {
   if (isRight.value) {
-    // TODO:调用登录接口
+    const userName = ruleForm.value.account;
+    const pwd = ruleForm.value.pass;
+
+    isRight.value = {
+      userName,
+      pwd,
+    };
+    getLogin(isRight);
+    console.log("登录成功");
+  } else {
+    // TODO：错误提示
+    console.log("请填写账号密码！");
   }
 };
-
-// TODO:语言切换持久全局化
-import { useI18n } from "vue-i18n";
-const { locale } = useI18n();
-
-const changeLang = () => {
-  console.log("locale.value:", locale.value);
-  locale.value === "zh-cn"
-    ? (locale.value = "en-us")
-    : (locale.value = "zh-cn");
-};
-
-// import { fetchData, getHome, getRouter } from "@/api/login";
 
 // const fetData = ref(null);
 // const getRouter1 = ref(null);
@@ -86,9 +95,7 @@ const changeLang = () => {
     <button @click="changeTheme()">切换主题</button>
 
     <button @click="changeLang()">切换语言</button>
-    <div class="login">{{ data }}数据</div>
-    <!-- <div class="login">{{ fetData }}</div> -->
-    <!-- <div class="login">{{ getRouter1 }}</div> -->
+    <div>{{ getLogin }}</div>
     <el-row class="login-form">
       <el-col :xs="0" :sm="0" :md="12" :lg="12" class="login-left">
         <div class="logo-con">
