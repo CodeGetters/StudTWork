@@ -5,30 +5,16 @@
  * @version:
  * @Date: 2023-06-21 18:10:04
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-06-30 23:43:01
+ * @LastEditTime: 2023-07-01 16:38:33
 -->
 <script setup>
 import { ref, onMounted } from "vue";
-
-import { fetchData, getHome, getRouter } from "@/api/login";
-
-const data = ref(null);
-const fetData = ref(null);
-const getRouter1 = ref(null);
-
-onMounted(() => {
-  fetchData(fetData);
-  getHome(data);
-  getRouter(getRouter1);
-});
-
-console.log("mode：", import.meta.env.MODE);
-
+import i18n from "@/i18n";
 import { changeTheme } from "@/utils/index";
 
-import useThemeStore from "../store/theme";
+const data = ref(null);
 
-const theme = useThemeStore();
+const isRight = ref(false);
 
 // 表单
 const ruleForm = ref({
@@ -36,67 +22,43 @@ const ruleForm = ref({
   pass: "",
 });
 
-const rules = () => {
-  account: [{ validator: validateAccount, trigger: "blur" }];
-  pass: [{ validator: validatePass, trigger: "blur" }];
+const regexpCheck = (rule, value, callback) => {
+  let regexp = /^[a-zA-Z0-9_-]{5,12}$/;
+
+  if (!regexp.test(value)) {
+    return callback(new Error(`${i18n.global.t("loginPage.verifyInfo")}`));
+  }
+  isRight.value = true;
+  callback();
 };
 
-// 账号验证
-let validateAccount = (rule, value, callback) => {
-  if (value === "") {
-    callback(new Error("请输入账号"));
-  } else {
-    if (ruleForm.checkPass !== "") {
-      ruleForm.validateField("checkAccount");
-    }
-    callback();
+const rules = ref({
+  account: [
+    {
+      required: true,
+      trigger: "blur",
+      validator: regexpCheck,
+    },
+  ],
+  pass: [
+    {
+      required: true,
+      trigger: "blur",
+      validator: regexpCheck,
+    },
+  ],
+});
+
+// 提交表单
+const submitForm = async () => {
+  if (isRight.value) {
+    // TODO:调用登录接口
   }
 };
-
-// 密码验证
-let validatePass = (rule, value, callback) => {
-  if (value === "") {
-    callback(new Error("请输入密码"));
-  } else {
-    if (ruleForm.checkPass !== "") {
-      ruleForm.validateField("checkPass");
-    }
-    callback();
-  }
-};
-
-const submitForm = (formName) => {
-  // this.$refs[formName].validate((valid) => {
-  // if (valid) {
-  // alert("submit!");
-  // } else {
-  // console.log("error submit!!");
-  // return false;
-  // }
-  // });
-
-  console.log(formName.validator);
-};
-
-// const submitForm = computed((formName) => {
-//   formName.validate((valid) => {
-//     if (valid) {
-//       alert("submit!");
-//     } else {
-//       console.log("error submit!!");
-//       return false;
-//     }
-//   });
-// });
-
-// 国际化
-import i18n from "@/i18n/index.js";
 
 // TODO:语言切换持久全局化
 import { useI18n } from "vue-i18n";
 const { locale } = useI18n();
-
-console.log("i18n:", i18n);
 
 const changeLang = () => {
   console.log("locale.value:", locale.value);
@@ -105,7 +67,18 @@ const changeLang = () => {
     : (locale.value = "zh-cn");
 };
 
-// console.log("中文：", i18n.global.t("loginPage.logoDesc"));
+// import { fetchData, getHome, getRouter } from "@/api/login";
+
+// const fetData = ref(null);
+// const getRouter1 = ref(null);
+
+// onMounted(() => {
+//   fetchData(fetData);
+//   getHome(data);
+//   getRouter(getRouter1);
+// });
+
+// console.log("mode：", import.meta.env.MODE);
 </script>
 
 <template>
@@ -114,11 +87,10 @@ const changeLang = () => {
 
     <button @click="changeLang()">切换语言</button>
     <div class="login">{{ data }}数据</div>
-    <div class="login">{{ fetData }}</div>
-    <div class="login">{{ getRouter1 }}</div>
+    <!-- <div class="login">{{ fetData }}</div> -->
+    <!-- <div class="login">{{ getRouter1 }}</div> -->
     <el-row class="login-form">
-      <el-col :xs="0" :sm="6" :md="12" :lg="12" class="login-left">
-        <div>{{ theme.isDark }}</div>
+      <el-col :xs="0" :sm="0" :md="12" :lg="12" class="login-left">
         <div class="logo-con">
           <div class="logo-box">
             <div class="logo">
@@ -129,7 +101,7 @@ const changeLang = () => {
           <div class="logo-des">{{ $t("loginPage.logoDesc") }}</div>
         </div>
       </el-col>
-      <el-col :xs="24" :sm="18" :md="12" :lg="12" class="login-right">
+      <el-col :xs="24" :sm="24" :md="12" :lg="12" class="login-right">
         <div class="login-form-container">
           <h1>{{ $t("loginPage.loginTitle") }}</h1>
           <div class="login-form-right-con">
@@ -137,7 +109,7 @@ const changeLang = () => {
               :model="ruleForm"
               status-icon
               :rules="rules"
-              ref="ruleForm"
+              :ref="ruleForm"
               label-width="100px"
               class="login-user-info"
             >
@@ -207,6 +179,7 @@ const changeLang = () => {
 <style scoped lang="less">
 #loginPage {
   width: 100%;
+  min-width: 375px;
   height: 100vh;
   display: flex;
   align-items: center;
@@ -236,6 +209,7 @@ const changeLang = () => {
       .logo-con {
         height: 23%;
         width: 52%;
+        margin: auto;
         display: flex;
         flex-direction: column;
         user-select: none;
@@ -316,7 +290,7 @@ const changeLang = () => {
             .forget-pwd {
               display: flex;
               height: 7%;
-              margin: 2% 0;
+              margin: 4% 0;
               font-size: 12px;
               align-items: center;
               justify-content: flex-end;
@@ -339,15 +313,19 @@ const changeLang = () => {
 
               .el-form-item__content {
                 min-height: 40px;
+
+                .el-form-item__error {
+                  font-size: 9px;
+                }
               }
             }
 
             .el-form-item--feedback:first-child {
-              margin-bottom: 3%;
+              margin-bottom: 8%;
             }
 
             .el-button--primary {
-              height: 20%;
+              height: 14%;
               border-radius: 50px;
             }
           }
@@ -404,8 +382,5 @@ const changeLang = () => {
     text-decoration: none;
     outline: none;
   }
-}
-.button {
-  color: red;
 }
 </style>
