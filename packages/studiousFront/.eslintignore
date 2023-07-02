@@ -5,4 +5,4 @@ dist
 src/assets
 public
 .env
-/dev-dist
+dev-dist
