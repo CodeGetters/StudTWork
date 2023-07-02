@@ -1,30 +1,42 @@
-<!--
- * @Descripttion:
- * @Author: CodeGetters
- * @version:
- * @Date: 2023-06-18 20:30:52
- * @LastEditors: CodeGetters
- * @LastEditTime: 2023-07-01 08:49:57
--->
-
 # StudTWork
 
-[repo](https://github.com/CodeGetters/studTWork)
+> A front end uses [Vue3.3](https://github.com/vuejs/core) + [Vite](https://github.com/element-plus/element-plus) technology, and the back end uses the blog front and back end system built by [koa2](https://github.com/koajs/koa)
 
-## dev
+## Installation
+
+Requires:
+
+- node >= `16`
+
+- pnpm >= `8`
 
 ```shell
-pnpm install
+$ git clone https://github.com/CodeGetters/studTBack.git
 
+# recommend
+$ pnpm install
+
+# or
+
+$ npm install
+```
+
+## Usage
+
+```shell
 # front
-pnpm dev:front
+$ pnpm dev:front
 
 # back
-pnpm dev:back
+$ pnpm dev:back
 
 # build
-pnpm build:front
+$ pnpm build:front
 
 # or you just want to build with mock data
-pnpm build:front-mock
+$ pnpm build:front-mock
 ```
+
+## License
+
+Apache 2.0

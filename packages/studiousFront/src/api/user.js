@@ -5,7 +5,7 @@
  * @version:
  * @Date: 2023-06-29 22:05:35
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-07-02 13:06:35
+ * @LastEditTime: 2023-07-02 16:40:25
  */
 import service from "./index";
 
@@ -14,6 +14,9 @@ export function login() {
 }
 
 // 发送请求的两种写法
+
+// 使用 async 可以捕获返回的值
+// 没有使用 async 捕获不了返回的值
 
 // 有---try---catch---会被捕获 error
 export const fetchData = async (data) => {
@@ -40,19 +43,15 @@ export const getRouter = (data) => {
   // });
 };
 
-// 登录
-export const getLogin = (data) => {
-  service
-    .post("/user/login", {
-      userName: data.value.userName,
-      pwd: data.value.pwd,
-    })
-    .then(function (res) {
-      data.value = res.data;
-      // console.log("getLogin:", res.data);
-    });
-  // .catch(function (err) {
-  //   // 捕获错误原因
-  //   console.log("response:", err.response);
-  // });
+/**
+ * @description:登录
+ * @param {*} data
+ * @returns res
+ */
+export const getLogin = async (data) => {
+  const response = await service.post("/user/login", {
+    userName: data.value.userName,
+    pwd: data.value.pwd,
+  });
+  return response.data;
 };
