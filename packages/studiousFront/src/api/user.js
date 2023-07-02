@@ -5,7 +5,7 @@
  * @version:
  * @Date: 2023-06-29 22:05:35
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-07-01 18:05:56
+ * @LastEditTime: 2023-07-02 13:06:35
  */
 import service from "./index";
 
@@ -22,26 +22,22 @@ export const fetchData = async (data) => {
 };
 // 有---try---catch---不会被捕获 error
 export const getHome = (data) => {
-  service
-    .get("/")
-    .then((res) => {
-      data.value = res.data;
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  service.get("/").then((res) => {
+    data.value = res.data;
+  });
+  // .catch((err) => {
+  // console.log(err);
+  // });
 };
 
 export const getRouter = (data) => {
-  service
-    .get("/router")
-    .then(function (res) {
-      data.value = res.data;
-      console.log("getHome", res.data);
-    })
-    .catch(function (err) {
-      console.log(err);
-    });
+  service.get("/router").then(function (res) {
+    data.value = res.data;
+    // console.log("getHome", res.data);
+  });
+  // .catch(function (err) {
+  //   console.log(err);
+  // });
 };
 
 // 登录
@@ -53,10 +49,10 @@ export const getLogin = (data) => {
     })
     .then(function (res) {
       data.value = res.data;
-      console.log("getLogin:", res.data);
-    })
-    .catch(function (err) {
-      // 捕获错误原因
-      console.log("response:", err.response);
+      // console.log("getLogin:", res.data);
     });
+  // .catch(function (err) {
+  //   // 捕获错误原因
+  //   console.log("response:", err.response);
+  // });
 };

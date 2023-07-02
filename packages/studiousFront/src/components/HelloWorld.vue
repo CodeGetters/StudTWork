@@ -4,7 +4,7 @@
  * @version:
  * @Date: 2023-06-18 20:30:52
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-07-01 07:30:38
+ * @LastEditTime: 2023-07-02 13:07:49
 -->
 <script setup>
 defineProps({
@@ -13,23 +13,23 @@ defineProps({
 
 const count = ref(0);
 
-import { ref, computed } from "vue";
+import { ref } from "vue";
 import { Check } from "@element-plus/icons-vue";
 const api = import.meta.env.VITE_BASE_URL;
 
 // vue-i18n国际化
-import i18n from "@/i18n/index.js";
-console.log("中文：", i18n.global.t("language.zh"));
+// import i18n from "@/i18n/index.js";
+// console.log("中文：", i18n.global.t("language.zh"));
 
 // element-plus 组件国际化
-const lang = ref("zh-cn");
-import zhCN from "element-plus/dist/locale/zh-cn.mjs";
-import en from "element-plus/dist/locale/en.mjs";
+// const lang = ref("zh-cn");
+// import zhCN from "element-plus/dist/locale/zh-cn.mjs";
+// import en from "element-plus/dist/locale/en.mjs";
 
-const locale = computed(() => (lang.value === "zh-cn" ? zhCN : en));
-const toggle = () => {
-  lang.value = lang.value === "zh-cn" ? "en" : "zh-cn";
-};
+// const locale = computed(() => (lang.value === "zh-cn" ? zhCN : en));
+// const toggle = () => {
+//   lang.value = lang.value === "zh-cn" ? "en" : "zh-cn";
+// };
 </script>
 
 <template>

@@ -7,3 +7,6 @@ packages/studiousFront/dist
 packages/studiousFront/src/assets
 packages/studiousFront/public
 packages/studiousFront/dev-dist/
+packages/studiousFront/vite.config.js
+packages/studiousFront/src/utils
+packages/studiousFront/test

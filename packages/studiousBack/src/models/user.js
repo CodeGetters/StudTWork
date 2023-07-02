@@ -5,12 +5,12 @@
  * @version:
  * @Date: 2023-06-30 11:48:21
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-07-01 11:42:52
+ * @LastEditTime: 2023-07-02 13:06:57
  */
 
 // const moment = require("moment");
 
-const { green } = require("kolorist");
+// const { green } = require("kolorist");
 
 const db = require("../db/mysql");
 const { sequelize, Model, DataTypes } = db;

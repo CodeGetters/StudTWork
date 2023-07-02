@@ -5,26 +5,31 @@
  * @version:
  * @Date: 2023-06-21 18:10:04
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-07-01 23:00:07
+ * @LastEditTime: 2023-07-02 13:40:27
 -->
 <script setup>
-import { ref, h } from "vue";
+import { ref } from "vue";
 import i18n from "@/i18n";
 import { changeTheme } from "@/utils/index";
 import { getLogin } from "@/api/user";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
 
 // TODO:语言切换持久全局化
 import { useI18n } from "vue-i18n";
 const { locale } = useI18n();
 
 const changeLang = () => {
-  console.log("locale.value:", locale.value);
   locale.value === "zh-cn"
     ? (locale.value = "en-us")
     : (locale.value = "zh-cn");
 };
 
-const isRight = ref(false);
+const isRight = ref({
+  account: false,
+  pwd: false,
+});
 
 // 表单
 const ruleForm = ref({
@@ -32,14 +37,34 @@ const ruleForm = ref({
   pass: "",
 });
 
-const regexpCheck = (rule, value, callback) => {
-  let regexp = /^[a-zA-Z0-9_-]{5,12}$/;
+const ruleFormRef = ref();
 
-  if (!regexp.test(value)) {
-    return callback(new Error(`${i18n.global.t("loginPage.verifyInfo")}`));
+const checkAccount = (rule, value, callback) => {
+  let usernameReg = /^(?=.*[a-zA-Z]).{4,11}$/;
+  let emailReg = /^([a-zA-Z\d][\w-]{2,})@(\w{2,})\.([a-z]{2,})(\.[a-z]{2,})?$/;
+  if (value === "") {
+    callback(new Error(i18n.global.t("loginPage.noNone")));
   } else {
-    isRight.value = true;
-    callback();
+    if (usernameReg.test(value) || emailReg.test(value)) {
+      if (!ruleFormRef.value) return;
+      isRight.value.account = true;
+      callback();
+    }
+    callback(new Error(i18n.global.t("loginPage.accountVerify")));
+  }
+};
+
+const checkPass = (rule, value, callback) => {
+  let passReg = /^(?=.*[a-zA-Z])(?=.*\d).{4,11}$/;
+  if (value === "") {
+    callback(new Error(i18n.global.t("loginPage.noNone")));
+  } else {
+    if (passReg.test(value)) {
+      if (!ruleFormRef.value) return;
+      isRight.value.pwd = true;
+      callback();
+    }
+    callback(new Error(i18n.global.t("loginPage.pwdVerify")));
   }
 };
 
@@ -48,21 +73,21 @@ const rules = ref({
     {
       required: true,
       trigger: "blur",
-      validator: regexpCheck,
+      validator: checkAccount,
     },
   ],
   pass: [
     {
       required: true,
       trigger: "blur",
-      validator: regexpCheck,
+      validator: checkPass,
     },
   ],
 });
 
 // 提交表单
 const submitForm = async () => {
-  if (isRight.value) {
+  if (isRight.value.account && isRight.value.pwd) {
     const userName = ruleForm.value.account;
     const pwd = ruleForm.value.pass;
 
@@ -71,22 +96,23 @@ const submitForm = async () => {
       pwd,
     };
     getLogin(isRight);
-    console.log("登录成功");
+    router.push({
+      path: "/home",
+      // 参数
+      // query: {},
+    });
     notification("success");
-  }
-  if (ruleForm.value.account === "" || ruleForm.value.pass === "") {
+  } else {
     notification("error");
   }
 };
 
 const notification = (type) => {
+  // eslint-disable-next-line no-undef
   ElNotification({
     title: "消息提示",
-    message: h(
-      "i",
-      { style: "color: #409eff" },
-      type === "success" ? `欢迎回来 ${ruleForm.value.account}` : "登录失败"
-    ),
+    message:
+      type === "success" ? `欢迎回来 ${ruleForm.value.account}` : "登录失败",
     type,
   });
 };
@@ -115,7 +141,14 @@ const notification = (type) => {
         <div class="login-form-container">
           <h1>{{ $t("loginPage.loginTitle") }}</h1>
           <div class="login-form-right-con">
-            <el-form label-width="100px" class="login-user-info">
+            <el-form
+              ref="ruleFormRef"
+              :model="ruleForm"
+              status-icon
+              :rules="rules"
+              label-width="100px"
+              class="login-user-info"
+            >
               <el-form-item :label="$t('loginPage.account')" prop="account">
                 <el-input
                   type="account"
@@ -289,12 +322,12 @@ const notification = (type) => {
             flex-direction: column;
             width: 100%;
             height: 64%;
-            margin-bottom: 2%;
+            margin-bottom: 4%;
 
             .forget-pwd {
               display: flex;
               height: 7%;
-              margin: 2% 0;
+              margin: 3.5%;
               font-size: 12px;
               align-items: center;
               justify-content: flex-end;
@@ -316,10 +349,10 @@ const notification = (type) => {
               }
 
               .el-form-item__content {
-                min-height: 40px;
+                min-height: 30px;
 
                 .el-form-item__error {
-                  font-size: 9px;
+                  font-size: 10px;
                 }
               }
             }
@@ -333,6 +366,7 @@ const notification = (type) => {
               border-radius: 50px;
             }
           }
+
           :deep(.other-platform-login) {
             height: 33%;
             display: flex;

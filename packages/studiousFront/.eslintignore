@@ -6,3 +6,6 @@ src/assets
 public
 .env
 dev-dist/
+vite.config.js
+test/
+utils/
