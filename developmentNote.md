@@ -1,12 +1,3 @@
-<!--
- * @Descripttion:
- * @Author: CodeGetters
- * @version:
- * @Date: 2023-06-19 22:16:29
- * @LastEditors: CodeGetters
- * @LastEditTime: 2023-06-29 10:34:13
--->
-
 # 开发笔记
 
 ## 开发准备

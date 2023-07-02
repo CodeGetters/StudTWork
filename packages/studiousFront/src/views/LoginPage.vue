@@ -5,98 +5,17 @@
  * @version:
  * @Date: 2023-06-21 18:10:04
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-06-30 23:43:01
+ * @LastEditTime: 2023-07-01 23:00:07
 -->
 <script setup>
-import { ref, onMounted } from "vue";
-
-import { fetchData, getHome, getRouter } from "@/api/login";
-
-const data = ref(null);
-const fetData = ref(null);
-const getRouter1 = ref(null);
-
-onMounted(() => {
-  fetchData(fetData);
-  getHome(data);
-  getRouter(getRouter1);
-});
-
-console.log("mode：", import.meta.env.MODE);
-
+import { ref, h } from "vue";
+import i18n from "@/i18n";
 import { changeTheme } from "@/utils/index";
-
-import useThemeStore from "../store/theme";
-
-const theme = useThemeStore();
-
-// 表单
-const ruleForm = ref({
-  account: "",
-  pass: "",
-});
-
-const rules = () => {
-  account: [{ validator: validateAccount, trigger: "blur" }];
-  pass: [{ validator: validatePass, trigger: "blur" }];
-};
-
-// 账号验证
-let validateAccount = (rule, value, callback) => {
-  if (value === "") {
-    callback(new Error("请输入账号"));
-  } else {
-    if (ruleForm.checkPass !== "") {
-      ruleForm.validateField("checkAccount");
-    }
-    callback();
-  }
-};
-
-// 密码验证
-let validatePass = (rule, value, callback) => {
-  if (value === "") {
-    callback(new Error("请输入密码"));
-  } else {
-    if (ruleForm.checkPass !== "") {
-      ruleForm.validateField("checkPass");
-    }
-    callback();
-  }
-};
-
-const submitForm = (formName) => {
-  // this.$refs[formName].validate((valid) => {
-  // if (valid) {
-  // alert("submit!");
-  // } else {
-  // console.log("error submit!!");
-  // return false;
-  // }
-  // });
-
-  console.log(formName.validator);
-};
-
-// const submitForm = computed((formName) => {
-//   formName.validate((valid) => {
-//     if (valid) {
-//       alert("submit!");
-//     } else {
-//       console.log("error submit!!");
-//       return false;
-//     }
-//   });
-// });
-
-// 国际化
-import i18n from "@/i18n/index.js";
+import { getLogin } from "@/api/user";
 
 // TODO:语言切换持久全局化
 import { useI18n } from "vue-i18n";
 const { locale } = useI18n();
-
-console.log("i18n:", i18n);
 
 const changeLang = () => {
   console.log("locale.value:", locale.value);
@@ -105,7 +24,74 @@ const changeLang = () => {
     : (locale.value = "zh-cn");
 };
 
-// console.log("中文：", i18n.global.t("loginPage.logoDesc"));
+const isRight = ref(false);
+
+// 表单
+const ruleForm = ref({
+  account: "",
+  pass: "",
+});
+
+const regexpCheck = (rule, value, callback) => {
+  let regexp = /^[a-zA-Z0-9_-]{5,12}$/;
+
+  if (!regexp.test(value)) {
+    return callback(new Error(`${i18n.global.t("loginPage.verifyInfo")}`));
+  } else {
+    isRight.value = true;
+    callback();
+  }
+};
+
+const rules = ref({
+  account: [
+    {
+      required: true,
+      trigger: "blur",
+      validator: regexpCheck,
+    },
+  ],
+  pass: [
+    {
+      required: true,
+      trigger: "blur",
+      validator: regexpCheck,
+    },
+  ],
+});
+
+// 提交表单
+const submitForm = async () => {
+  if (isRight.value) {
+    const userName = ruleForm.value.account;
+    const pwd = ruleForm.value.pass;
+
+    isRight.value = {
+      userName,
+      pwd,
+    };
+    getLogin(isRight);
+    console.log("登录成功");
+    notification("success");
+  }
+  if (ruleForm.value.account === "" || ruleForm.value.pass === "") {
+    notification("error");
+  }
+};
+
+const notification = (type) => {
+  ElNotification({
+    title: "消息提示",
+    message: h(
+      "i",
+      { style: "color: #409eff" },
+      type === "success" ? `欢迎回来 ${ruleForm.value.account}` : "登录失败"
+    ),
+    type,
+  });
+};
+
+// console.log("mode：", import.meta.env.MODE);
 </script>
 
 <template>
@@ -113,12 +99,8 @@ const changeLang = () => {
     <button @click="changeTheme()">切换主题</button>
 
     <button @click="changeLang()">切换语言</button>
-    <div class="login">{{ data }}数据</div>
-    <div class="login">{{ fetData }}</div>
-    <div class="login">{{ getRouter1 }}</div>
     <el-row class="login-form">
-      <el-col :xs="0" :sm="6" :md="12" :lg="12" class="login-left">
-        <div>{{ theme.isDark }}</div>
+      <el-col :xs="0" :sm="0" :md="12" :lg="12" class="login-left">
         <div class="logo-con">
           <div class="logo-box">
             <div class="logo">
@@ -129,18 +111,11 @@ const changeLang = () => {
           <div class="logo-des">{{ $t("loginPage.logoDesc") }}</div>
         </div>
       </el-col>
-      <el-col :xs="24" :sm="18" :md="12" :lg="12" class="login-right">
+      <el-col :xs="24" :sm="24" :md="12" :lg="12" class="login-right">
         <div class="login-form-container">
           <h1>{{ $t("loginPage.loginTitle") }}</h1>
           <div class="login-form-right-con">
-            <el-form
-              :model="ruleForm"
-              status-icon
-              :rules="rules"
-              ref="ruleForm"
-              label-width="100px"
-              class="login-user-info"
-            >
+            <el-form label-width="100px" class="login-user-info">
               <el-form-item :label="$t('loginPage.account')" prop="account">
                 <el-input
                   type="account"
@@ -164,6 +139,7 @@ const changeLang = () => {
                 $t("loginPage.loginForm")
               }}</el-button>
             </el-form>
+
             <div class="other-platform-login">
               <el-divider content-position="center">{{
                 $t("loginPage.otherPlatform")
@@ -207,6 +183,7 @@ const changeLang = () => {
 <style scoped lang="less">
 #loginPage {
   width: 100%;
+  min-width: 375px;
   height: 100vh;
   display: flex;
   align-items: center;
@@ -236,6 +213,7 @@ const changeLang = () => {
       .logo-con {
         height: 23%;
         width: 52%;
+        margin: auto;
         display: flex;
         flex-direction: column;
         user-select: none;
@@ -311,7 +289,7 @@ const changeLang = () => {
             flex-direction: column;
             width: 100%;
             height: 64%;
-            margin-bottom: 3%;
+            margin-bottom: 2%;
 
             .forget-pwd {
               display: flex;
@@ -339,15 +317,19 @@ const changeLang = () => {
 
               .el-form-item__content {
                 min-height: 40px;
+
+                .el-form-item__error {
+                  font-size: 9px;
+                }
               }
             }
 
             .el-form-item--feedback:first-child {
-              margin-bottom: 3%;
+              margin-bottom: 8%;
             }
 
             .el-button--primary {
-              height: 20%;
+              height: 14%;
               border-radius: 50px;
             }
           }
@@ -404,8 +386,5 @@ const changeLang = () => {
     text-decoration: none;
     outline: none;
   }
-}
-.button {
-  color: red;
 }
 </style>

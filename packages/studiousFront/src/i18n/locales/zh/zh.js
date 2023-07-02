@@ -4,7 +4,7 @@
  * @version:
  * @Date: 2023-06-21 20:00:16
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-06-30 22:15:51
+ * @LastEditTime: 2023-07-01 16:20:01
  */
 const zhCN = {
   admin: "后台管理系统",
@@ -27,6 +27,7 @@ const zhCN = {
     policyAgree: "政策协议",
     accountIpt: "请输入用户名/手机号/邮箱号",
     passwordIpt: "请输入密码",
+    verifyInfo: "所填字段必须是5-12位且不包含特殊符号的字符",
   },
 };
 

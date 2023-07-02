@@ -4,7 +4,7 @@
  * @version:
  * @Date: 2023-06-21 20:00:09
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-06-30 22:51:13
+ * @LastEditTime: 2023-07-01 16:20:44
  */
 const zhCN = {
   admin: "admin",
@@ -27,6 +27,8 @@ const zhCN = {
     policyAgree: "policy agreement",
     accountIpt: "Please enter userName/phoneNumber/email",
     passwordIpt: "Please enter password",
+    verifyInfo:
+      "The fields must be 5-12 characters and contain no special symbols",
   },
 };
 
