@@ -1,8 +1,8 @@
-auto-imports.d.ts
-components.d.ts
+src/auto-imports.d.ts
+src/components.d.ts
 
 dist
 src/assets
 public
 .env
-dev-dist
+dev-dist/

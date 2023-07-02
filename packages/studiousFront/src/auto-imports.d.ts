@@ -84,6 +84,9 @@ import { UnwrapRef } from "vue";
 declare module "vue" {
   interface ComponentCustomProperties {
     readonly EffectScope: UnwrapRef<typeof import("vue")["EffectScope"]>;
+    readonly ElNotification: UnwrapRef<
+      typeof import("element-plus/es")["ElNotification"]
+    >;
     readonly computed: UnwrapRef<typeof import("vue")["computed"]>;
     readonly createApp: UnwrapRef<typeof import("vue")["createApp"]>;
     readonly customRef: UnwrapRef<typeof import("vue")["customRef"]>;
@@ -180,6 +183,9 @@ declare module "vue" {
 declare module "@vue/runtime-core" {
   interface ComponentCustomProperties {
     readonly EffectScope: UnwrapRef<typeof import("vue")["EffectScope"]>;
+    readonly ElNotification: UnwrapRef<
+      typeof import("element-plus/es")["ElNotification"]
+    >;
     readonly computed: UnwrapRef<typeof import("vue")["computed"]>;
     readonly createApp: UnwrapRef<typeof import("vue")["createApp"]>;
     readonly customRef: UnwrapRef<typeof import("vue")["customRef"]>;
