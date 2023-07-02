@@ -1,14 +1,14 @@
 /*
- * @Description-en:
- * @Description-zh:
+ * @Description-en:introduction mysql database
+ * @Description-zh:引入 mysql 数据库
  * @Author: CodeGetters
  * @version:
  * @Date: 2023-06-29 20:10:22
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-06-30 13:20:37
+ * @LastEditTime: 2023-07-01 09:22:08
  */
 
-const { Sequelize } = require("sequelize");
+const { Sequelize, DataTypes, Model } = require("sequelize");
 
 const { green, red } = require("kolorist");
 
@@ -50,4 +50,6 @@ sequelize
     console.log(red("[MYSQL]"), "连接失败...");
   });
 
-module.exports = sequelize;
+const mysql = { sequelize, DataTypes, Model };
+
+module.exports = mysql;

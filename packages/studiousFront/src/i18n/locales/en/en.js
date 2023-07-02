@@ -4,7 +4,7 @@
  * @version:
  * @Date: 2023-06-21 20:00:09
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-06-30 22:51:13
+ * @LastEditTime: 2023-07-02 13:36:36
  */
 const zhCN = {
   admin: "admin",
@@ -25,8 +25,12 @@ const zhCN = {
     register: "go register",
     privateCon: "private content",
     policyAgree: "policy agreement",
-    accountIpt: "Please enter userName/phoneNumber/email",
+    accountIpt: "Please enter userName/email",
     passwordIpt: "Please enter password",
+    accountVerify: "Please enter an email address or a 5-12 letter username",
+    pwdVerify:
+      "Please enter a 5-12 digit password containing letters and numbers",
+    noNone: "The input field cannot be empty",
   },
 };
 

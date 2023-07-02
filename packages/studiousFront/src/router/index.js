@@ -4,12 +4,11 @@
  * @version:
  * @Date: 2023-06-18 21:18:19
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-06-24 19:13:29
+ * @LastEditTime: 2023-07-01 22:09:15
  */
 import { createRouter, createWebHistory } from "vue-router";
 
 const Home = () => import("../views/HomePage.vue");
-const Login = () => import("../views/LoginPage.vue");
 const routes = [
   {
     path: "/",
@@ -21,7 +20,7 @@ const routes = [
   {
     path: "/login",
     name: "Login",
-    component: Login,
+    component: () => import("../views/LoginPage.vue"),
     meta: { transition: "slide-right" },
   },
 ];

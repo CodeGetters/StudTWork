@@ -1,10 +1,10 @@
 /*
- * @Descripttion:
+ * @Description:
  * @Author: CodeGetters
  * @version:
  * @Date: 2023-06-18 20:30:52
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-06-21 16:37:43
+ * @LastEditTime: 2023-07-01 20:25:22
  */
 // commitlint.config.js
 

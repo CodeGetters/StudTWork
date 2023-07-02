@@ -4,7 +4,7 @@
  * @version:
  * @Date: 2023-06-21 20:00:16
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-06-30 22:15:51
+ * @LastEditTime: 2023-07-02 13:34:29
  */
 const zhCN = {
   admin: "后台管理系统",
@@ -25,8 +25,11 @@ const zhCN = {
     register: "去注册",
     privateCon: "隐私内容",
     policyAgree: "政策协议",
-    accountIpt: "请输入用户名/手机号/邮箱号",
+    accountIpt: "请输入用户名/邮箱号",
     passwordIpt: "请输入密码",
+    accountVerify: "请输入邮箱或5-12位包含字母的用户名",
+    pwdVerify: "请输入5-12位包含字母和数字的密码",
+    noNone: "输入框不能为空",
   },
 };
 

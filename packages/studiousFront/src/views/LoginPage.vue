@@ -5,30 +5,31 @@
  * @version:
  * @Date: 2023-06-21 18:10:04
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-06-30 23:43:01
+ * @LastEditTime: 2023-07-02 13:40:27
 -->
 <script setup>
-import { ref, onMounted } from "vue";
-
-import { fetchData, getHome, getRouter } from "@/api/login";
-
-const data = ref(null);
-const fetData = ref(null);
-const getRouter1 = ref(null);
-
-onMounted(() => {
-  fetchData(fetData);
-  getHome(data);
-  getRouter(getRouter1);
-});
-
-console.log("mode：", import.meta.env.MODE);
-
+import { ref } from "vue";
+import i18n from "@/i18n";
 import { changeTheme } from "@/utils/index";
+import { getLogin } from "@/api/user";
+import { useRouter } from "vue-router";
 
-import useThemeStore from "../store/theme";
+const router = useRouter();
 
-const theme = useThemeStore();
+// TODO:语言切换持久全局化
+import { useI18n } from "vue-i18n";
+const { locale } = useI18n();
+
+const changeLang = () => {
+  locale.value === "zh-cn"
+    ? (locale.value = "en-us")
+    : (locale.value = "zh-cn");
+};
+
+const isRight = ref({
+  account: false,
+  pwd: false,
+});
 
 // 表单
 const ruleForm = ref({
@@ -36,76 +37,87 @@ const ruleForm = ref({
   pass: "",
 });
 
-const rules = () => {
-  account: [{ validator: validateAccount, trigger: "blur" }];
-  pass: [{ validator: validatePass, trigger: "blur" }];
-};
+const ruleFormRef = ref();
 
-// 账号验证
-let validateAccount = (rule, value, callback) => {
+const checkAccount = (rule, value, callback) => {
+  let usernameReg = /^(?=.*[a-zA-Z]).{4,11}$/;
+  let emailReg = /^([a-zA-Z\d][\w-]{2,})@(\w{2,})\.([a-z]{2,})(\.[a-z]{2,})?$/;
   if (value === "") {
-    callback(new Error("请输入账号"));
+    callback(new Error(i18n.global.t("loginPage.noNone")));
   } else {
-    if (ruleForm.checkPass !== "") {
-      ruleForm.validateField("checkAccount");
+    if (usernameReg.test(value) || emailReg.test(value)) {
+      if (!ruleFormRef.value) return;
+      isRight.value.account = true;
+      callback();
     }
-    callback();
+    callback(new Error(i18n.global.t("loginPage.accountVerify")));
   }
 };
 
-// 密码验证
-let validatePass = (rule, value, callback) => {
+const checkPass = (rule, value, callback) => {
+  let passReg = /^(?=.*[a-zA-Z])(?=.*\d).{4,11}$/;
   if (value === "") {
-    callback(new Error("请输入密码"));
+    callback(new Error(i18n.global.t("loginPage.noNone")));
   } else {
-    if (ruleForm.checkPass !== "") {
-      ruleForm.validateField("checkPass");
+    if (passReg.test(value)) {
+      if (!ruleFormRef.value) return;
+      isRight.value.pwd = true;
+      callback();
     }
-    callback();
+    callback(new Error(i18n.global.t("loginPage.pwdVerify")));
   }
 };
 
-const submitForm = (formName) => {
-  // this.$refs[formName].validate((valid) => {
-  // if (valid) {
-  // alert("submit!");
-  // } else {
-  // console.log("error submit!!");
-  // return false;
-  // }
-  // });
+const rules = ref({
+  account: [
+    {
+      required: true,
+      trigger: "blur",
+      validator: checkAccount,
+    },
+  ],
+  pass: [
+    {
+      required: true,
+      trigger: "blur",
+      validator: checkPass,
+    },
+  ],
+});
 
-  console.log(formName.validator);
+// 提交表单
+const submitForm = async () => {
+  if (isRight.value.account && isRight.value.pwd) {
+    const userName = ruleForm.value.account;
+    const pwd = ruleForm.value.pass;
+
+    isRight.value = {
+      userName,
+      pwd,
+    };
+    getLogin(isRight);
+    router.push({
+      path: "/home",
+      // 参数
+      // query: {},
+    });
+    notification("success");
+  } else {
+    notification("error");
+  }
 };
 
-// const submitForm = computed((formName) => {
-//   formName.validate((valid) => {
-//     if (valid) {
-//       alert("submit!");
-//     } else {
-//       console.log("error submit!!");
-//       return false;
-//     }
-//   });
-// });
-
-// 国际化
-import i18n from "@/i18n/index.js";
-
-// TODO:语言切换持久全局化
-import { useI18n } from "vue-i18n";
-const { locale } = useI18n();
-
-console.log("i18n:", i18n);
-
-const changeLang = () => {
-  console.log("locale.value:", locale.value);
-  locale.value === "zh-cn"
-    ? (locale.value = "en-us")
-    : (locale.value = "zh-cn");
+const notification = (type) => {
+  // eslint-disable-next-line no-undef
+  ElNotification({
+    title: "消息提示",
+    message:
+      type === "success" ? `欢迎回来 ${ruleForm.value.account}` : "登录失败",
+    type,
+  });
 };
 
-// console.log("中文：", i18n.global.t("loginPage.logoDesc"));
+// console.log("mode：", import.meta.env.MODE);
 </script>
 
 <template>
@@ -113,12 +125,8 @@ const changeLang = () => {
     <button @click="changeTheme()">切换主题</button>
 
     <button @click="changeLang()">切换语言</button>
-    <div class="login">{{ data }}数据</div>
-    <div class="login">{{ fetData }}</div>
-    <div class="login">{{ getRouter1 }}</div>
     <el-row class="login-form">
-      <el-col :xs="0" :sm="6" :md="12" :lg="12" class="login-left">
-        <div>{{ theme.isDark }}</div>
+      <el-col :xs="0" :sm="0" :md="12" :lg="12" class="login-left">
         <div class="logo-con">
           <div class="logo-box">
             <div class="logo">
@@ -129,15 +137,15 @@ const changeLang = () => {
           <div class="logo-des">{{ $t("loginPage.logoDesc") }}</div>
         </div>
       </el-col>
-      <el-col :xs="24" :sm="18" :md="12" :lg="12" class="login-right">
+      <el-col :xs="24" :sm="24" :md="12" :lg="12" class="login-right">
         <div class="login-form-container">
           <h1>{{ $t("loginPage.loginTitle") }}</h1>
           <div class="login-form-right-con">
             <el-form
+              ref="ruleFormRef"
               :model="ruleForm"
               status-icon
               :rules="rules"
-              ref="ruleForm"
               label-width="100px"
               class="login-user-info"
             >
@@ -164,6 +172,7 @@ const changeLang = () => {
                 $t("loginPage.loginForm")
               }}</el-button>
             </el-form>
+
             <div class="other-platform-login">
               <el-divider content-position="center">{{
                 $t("loginPage.otherPlatform")
@@ -207,6 +216,7 @@ const changeLang = () => {
 <style scoped lang="less">
 #loginPage {
   width: 100%;
+  min-width: 375px;
   height: 100vh;
   display: flex;
   align-items: center;
@@ -236,6 +246,7 @@ const changeLang = () => {
       .logo-con {
         height: 23%;
         width: 52%;
+        margin: auto;
         display: flex;
         flex-direction: column;
         user-select: none;
@@ -311,12 +322,12 @@ const changeLang = () => {
             flex-direction: column;
             width: 100%;
             height: 64%;
-            margin-bottom: 3%;
+            margin-bottom: 4%;
 
             .forget-pwd {
               display: flex;
               height: 7%;
-              margin: 2% 0;
+              margin: 3.5%;
               font-size: 12px;
               align-items: center;
               justify-content: flex-end;
@@ -338,19 +349,24 @@ const changeLang = () => {
               }
 
               .el-form-item__content {
-                min-height: 40px;
+                min-height: 30px;
+
+                .el-form-item__error {
+                  font-size: 10px;
+                }
               }
             }
 
             .el-form-item--feedback:first-child {
-              margin-bottom: 3%;
+              margin-bottom: 8%;
             }
 
             .el-button--primary {
-              height: 20%;
+              height: 14%;
               border-radius: 50px;
             }
           }
+
           :deep(.other-platform-login) {
             height: 33%;
             display: flex;
@@ -404,8 +420,5 @@ const changeLang = () => {
     text-decoration: none;
     outline: none;
   }
-}
-.button {
-  color: red;
 }
 </style>

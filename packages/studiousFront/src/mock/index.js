@@ -5,7 +5,7 @@
  * @version:
  * @Date: 2023-06-24 17:11:59
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-06-27 13:01:24
+ * @LastEditTime: 2023-07-01 17:47:01
  */
 import Mock from "mockjs";
 
@@ -28,4 +28,11 @@ Mock.mock(BaseURL + "/router", "get", {
     info: "Mock successful!",
   },
   // data: "Mock successful!",
+});
+
+// 登录
+Mock.mock(BaseURL + "/user/login", "post", {
+  status: 200,
+  data: {},
+  msg: "登录成功！",
 });

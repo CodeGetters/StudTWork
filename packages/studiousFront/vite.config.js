@@ -4,7 +4,7 @@
  * @version:
  * @Date: 2023-06-19 22:16:29
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-06-29 13:48:50
+ * @LastEditTime: 2023-07-01 07:24:10
  */
 
 import { defineConfig, loadEnv } from "vite";
@@ -26,6 +26,8 @@ import path, { resolve } from "node:path";
 import viteCompression from "vite-plugin-compression";
 
 import { VitePWA } from "vite-plugin-pwa";
+
+// import VueDevTools from "vite-plugin-vue-devtools";
 
 // https://vitejs.dev/config/
 
@@ -105,6 +107,8 @@ export default ({ mode }) => {
     },
     plugins: [
       vue(),
+      // https://github.com/webfansplz/vite-plugin-vue-devtools
+      // VueDevTools(),
       // https://github.com/antfu/unplugin-auto-import
       AutoImport({
         resolvers: [ElementPlusResolver()],
