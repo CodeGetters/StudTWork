@@ -5,7 +5,7 @@
  * @version:
  * @Date: 2023-06-21 18:10:04
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-07-02 13:40:27
+ * @LastEditTime: 2023-07-02 16:45:51
 -->
 <script setup>
 import { ref } from "vue";
@@ -20,6 +20,9 @@ const router = useRouter();
 import { useI18n } from "vue-i18n";
 const { locale } = useI18n();
 
+/**
+ * @description 语言切换
+ */
 const changeLang = () => {
   locale.value === "zh-cn"
     ? (locale.value = "en-us")
@@ -39,6 +42,12 @@ const ruleForm = ref({
 
 const ruleFormRef = ref();
 
+/**
+ * @description 用户名或邮箱校验
+ * @param {*} rule
+ * @param {*} value
+ * @param {*} callback
+ */
 const checkAccount = (rule, value, callback) => {
   let usernameReg = /^(?=.*[a-zA-Z]).{4,11}$/;
   let emailReg = /^([a-zA-Z\d][\w-]{2,})@(\w{2,})\.([a-z]{2,})(\.[a-z]{2,})?$/;
@@ -54,6 +63,12 @@ const checkAccount = (rule, value, callback) => {
   }
 };
 
+/**
+ * @description 密码校验
+ * @param {*} rule
+ * @param {*} value
+ * @param {*} callback
+ */
 const checkPass = (rule, value, callback) => {
   let passReg = /^(?=.*[a-zA-Z])(?=.*\d).{4,11}$/;
   if (value === "") {
@@ -68,6 +83,7 @@ const checkPass = (rule, value, callback) => {
   }
 };
 
+// 校验规则配置
 const rules = ref({
   account: [
     {
@@ -85,7 +101,9 @@ const rules = ref({
   ],
 });
 
-// 提交表单
+/**
+ * @description 登录
+ */
 const submitForm = async () => {
   if (isRight.value.account && isRight.value.pwd) {
     const userName = ruleForm.value.account;
@@ -95,24 +113,35 @@ const submitForm = async () => {
       userName,
       pwd,
     };
-    getLogin(isRight);
-    router.push({
-      path: "/home",
-      // 参数
-      // query: {},
-    });
-    notification("success");
+
+    // 调用登录接口
+    await getLogin(isRight)
+      .then(() => {
+        notification("success");
+        router.push({
+          path: "/home",
+          // 参数
+          // query: {},
+        });
+      })
+      .catch((err) => {
+        notification(err, err.response.data.msg);
+      });
   } else {
     notification("error");
   }
 };
 
-const notification = (type) => {
+/**
+ * @description 登录结果提示
+ * @param {*} type 弹出类型 err ? success
+ * @param {*} msg 失败信息
+ */
+const notification = (type, msg) => {
   // eslint-disable-next-line no-undef
   ElNotification({
     title: "消息提示",
-    message:
-      type === "success" ? `欢迎回来 ${ruleForm.value.account}` : "登录失败",
+    message: type === "success" ? `欢迎回来 ${ruleForm.value.account}` : msg,
     type,
   });
 };

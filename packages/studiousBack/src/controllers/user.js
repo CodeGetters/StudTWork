@@ -62,7 +62,7 @@ class userController extends baseController {
     ctx.body = baseController.renderJsonSuccess(msg, res);
   }
 
-  // TODO:token判断
+  // TODO:token 判断
   static async userLogin(ctx) {
     let msg = "登录成功";
 
