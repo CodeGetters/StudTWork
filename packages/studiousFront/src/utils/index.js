@@ -5,7 +5,7 @@
  * @version:
  * @Date: 2023-06-21 15:04:57
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-06-30 23:38:25
+ * @LastEditTime: 2023-07-03 20:31:53
  */
 
 import useThemeStore from "../store/theme";
@@ -14,10 +14,10 @@ const theme = useThemeStore();
 let timer = null;
 
 export const changeTheme = () => {
-  // 默认 dark
   if (!theme.isDark) {
     timer = setTimeout(() => {
       document.documentElement.setAttribute("theme", "dark");
+      // 切换
       theme.toggleTheme();
     }, 500);
   } else {
@@ -29,6 +29,13 @@ export const changeTheme = () => {
 };
 clearTimeout(timer);
 
+export const recallTheme = () => {
+  if (theme.isDark) {
+    document.documentElement.setAttribute("theme", "dark");
+  } else {
+    document.documentElement.removeAttribute("theme");
+  }
+};
 // const lang = useLangStore();
 
 // export const changeLang = () => {
