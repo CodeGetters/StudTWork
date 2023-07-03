@@ -10,3 +10,15 @@ packages/studiousFront/dev-dist/
 packages/studiousFront/vite.config.js
 packages/studiousFront/src/utils
 packages/studiousFront/test
+
+
+packages/studworkFront/src/auto-imports.d.ts
+packages/studworkFront/src/components.d.ts
+packages/studworkFront/.env
+packages/studworkFront/dist
+packages/studworkFront/src/assets
+packages/studworkFront/public
+packages/studworkFront/dev-dist/
+packages/studworkFront/vite.config.js
+packages/studworkFront/src/utils
+packages/studworkFront/test

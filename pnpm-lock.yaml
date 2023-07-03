@@ -81,6 +81,9 @@ importers:
 
   packages/studiousFront:
     dependencies:
+      animate.css:
+        specifier: ^4.1.1
+        version: registry.npmmirror.com/animate.css@4.1.1
       axios:
         specifier: ^1.4.0
         version: registry.npmmirror.com/axios@1.4.0
@@ -3643,6 +3646,12 @@ packages:
     resolution: {integrity: sha512-OwIuC4yZaRogHKiuU5WlMR5Xk/jAcpPtawWL05Gj8Lvm2F6mwoJt4O/bHI+DHwG79vWd+8OFYM4/BzYqyRd3qw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/amp/-/amp-0.3.1.tgz}
     name: amp
     version: 0.3.1
+    dev: false
+
+  registry.npmmirror.com/animate.css@4.1.1:
+    resolution: {integrity: sha512-+mRmCTv6SbCmtYJCN4faJMNFVNN5EuCTTprDTAo7YzIGji2KADmakjVA3+8mVDkZ2Bf09vayB35lSQIex2+QaQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/animate.css/-/animate.css-4.1.1.tgz}
+    name: animate.css
+    version: 4.1.1
     dev: false
 
   registry.npmmirror.com/ansi-colors@4.1.3:
