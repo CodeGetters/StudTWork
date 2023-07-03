@@ -5,7 +5,7 @@
  * @version:
  * @Date: 2023-06-21 15:04:57
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-07-03 20:31:53
+ * @LastEditTime: 2023-07-03 21:13:18
  */
 
 import useThemeStore from "../store/theme";
@@ -13,6 +13,9 @@ import useThemeStore from "../store/theme";
 const theme = useThemeStore();
 let timer = null;
 
+/**
+ * @description 触发切换主题
+ */
 export const changeTheme = () => {
   if (!theme.isDark) {
     timer = setTimeout(() => {
@@ -29,6 +32,9 @@ export const changeTheme = () => {
 };
 clearTimeout(timer);
 
+/**
+ * @description 用于首次渲染时获取 localStorage 的值渲染主题
+ */
 export const recallTheme = () => {
   if (theme.isDark) {
     document.documentElement.setAttribute("theme", "dark");

@@ -25,7 +25,7 @@ module.exports = {
         "chore", // 不修改src或者test的其他修改，例如构建过程或辅助工具的变更
         "revert", // 执行git revert打印的message
         "pref", // 提升性能的改动
-        "merge", // 代码合并
+        "scope", // 样式，接口，逻辑层
       ],
     ],
     "type-case": [0],

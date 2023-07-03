@@ -11,7 +11,7 @@
 import { ref, onMounted } from "vue";
 import i18n from "@/i18n";
 import { changeTheme, recallTheme } from "@/utils/index";
-import { getLogin } from "@/api/user";
+import { postLogin } from "@/api/user";
 import { useRouter } from "vue-router";
 import useAuthStore from "../store/auth";
 
@@ -120,7 +120,7 @@ const submitForm = async () => {
       pwd,
     };
     // 调用登录接口
-    await getLogin(isRight)
+    await postLogin(isRight)
       .then((res) => {
         notification("success");
         // token 持久化
