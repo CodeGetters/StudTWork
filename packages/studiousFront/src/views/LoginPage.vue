@@ -5,7 +5,7 @@
  * @version:
  * @Date: 2023-06-21 18:10:04
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-07-02 16:45:51
+ * @LastEditTime: 2023-07-03 15:44:18
 -->
 <script setup>
 import { ref } from "vue";
@@ -13,7 +13,9 @@ import i18n from "@/i18n";
 import { changeTheme } from "@/utils/index";
 import { getLogin } from "@/api/user";
 import { useRouter } from "vue-router";
+import useAuthStore from "../store/auth";
 
+const authStore = useAuthStore();
 const router = useRouter();
 
 // TODO:语言切换持久全局化
@@ -108,16 +110,16 @@ const submitForm = async () => {
   if (isRight.value.account && isRight.value.pwd) {
     const userName = ruleForm.value.account;
     const pwd = ruleForm.value.pass;
-
     isRight.value = {
       userName,
       pwd,
     };
-
     // 调用登录接口
     await getLogin(isRight)
-      .then(() => {
+      .then((res) => {
         notification("success");
+        // token 持久化
+        authStore.setToken(JSON.stringify(res.data.token));
         router.push({
           path: "/home",
           // 参数
