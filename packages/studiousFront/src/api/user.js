@@ -5,7 +5,7 @@
  * @version:
  * @Date: 2023-06-29 22:05:35
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-07-02 16:40:25
+ * @LastEditTime: 2023-07-03 15:49:56
  */
 import service from "./index";
 
@@ -55,3 +55,7 @@ export const getLogin = async (data) => {
   });
   return response.data;
 };
+
+// export const postLogout = async (data) => {
+//   await service.post("/user/post", {});
+// };

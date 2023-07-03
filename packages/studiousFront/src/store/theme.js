@@ -5,7 +5,7 @@
  * @version:
  * @Date: 2023-06-29 22:05:35
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-06-30 23:21:48
+ * @LastEditTime: 2023-07-03 14:48:19
  */
 import { defineStore } from "pinia";
 
@@ -15,6 +15,7 @@ const useThemeStore = defineStore("theme", {
       isDark: false,
     };
   },
+  persist: true,
   actions: {
     toggleTheme() {
       this.isDark = !this.isDark;

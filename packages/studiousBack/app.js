@@ -4,12 +4,18 @@
  * @version:
  * @Date: 2023-06-18 20:30:52
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-06-30 11:11:26
+ * @LastEditTime: 2023-07-03 00:26:37
  */
 const koa = require("koa");
 const cors = require("koa-cors");
 const port = require("./src/config/globalConfig").port;
+// const secret = require("./src/config/globalConfig").jwtOption.secret;
+// const koaJwt = require("koa-jwt");
 const bodyParser = require("koa-body").default;
+
+const path = require("path");
+
+const koaStatic = require("koa-static");
 
 // https://github.com/koajs/koa-body/issues/215
 // const bodyParser = require("koa-body");
@@ -20,6 +26,9 @@ const bodyParser = require("koa-body").default;
 // const convert = require("koa-convert");
 
 const app = new koa();
+
+// 静态文件处理
+app.use(koaStatic(path.join(__dirname, "./public")));
 
 const Router = require("./src/router/index");
 
@@ -66,6 +75,26 @@ app.use(
 // 启动路由
 // 运行任何请求-get/post/put/delete 等
 app.use(Router.routes(), Router.allowedMethods());
+
+// 颁发 token
+// app.use(
+//   koaJwt({ secret }).unless({
+//     path: [/^\/public/, /^\/login/, /^\/register/],
+//   })
+// );
+
+// 处理 JWT 验证错误
+// app.use(async (ctx, next) => {
+//   try {
+//     await next();
+//   } catch (err) {
+//     if (err.status === 401) {
+//       ctx.throw(401, "Invalid token");
+//     } else {
+//       throw err;
+//     }
+//   }
+// });
 
 app.listen(port);
 

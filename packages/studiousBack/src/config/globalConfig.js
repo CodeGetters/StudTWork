@@ -5,7 +5,7 @@
  * @version:
  * @Date: 2023-06-29 22:47:22
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-07-01 09:35:09
+ * @LastEditTime: 2023-07-03 10:49:51
  */
 const defineConfig = {
   port: 5000,
@@ -16,6 +16,12 @@ const defineConfig = {
     host: "localhost",
     dialect: "mysql",
     database: "studTwork",
+  },
+
+  jwtOption: {
+    secret: "StudTWork",
+    validTime: "1d",
+    carryInfo: {},
   },
 };
 

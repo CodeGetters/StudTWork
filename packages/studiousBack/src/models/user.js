@@ -5,10 +5,8 @@
  * @version:
  * @Date: 2023-06-30 11:48:21
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-07-02 15:59:46
+ * @LastEditTime: 2023-07-03 13:49:02
  */
-
-// const moment = require("moment");
 
 // const { green } = require("kolorist");
 
@@ -23,21 +21,48 @@ class userModel extends Model {}
 userModel.init(
   {
     id: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER,
       primaryKey: true,
-      allowNull: false,
       autoIncrement: true,
     },
     userName: {
-      type: DataTypes.CHAR,
+      type: DataTypes.STRING,
       allowNull: false,
       field: "userName",
+      comment: "用户名(5-12)或邮箱",
     },
     pwd: {
-      type: DataTypes.CHAR,
+      type: DataTypes.STRING,
       allowNull: false,
       field: "pwd",
+      comment: "密码(5-12)",
     },
+    authority: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      field: "authority",
+      comment: "权限等级，数字越大权限越大",
+    },
+    // 超级管理员 4、管理员 3、用户 2、游客 1
+    role: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      field: "role",
+      comment: "角色",
+    },
+    registerTime: {
+      type: DataTypes.DATE,
+      field: "registerTime",
+      allowNull: false,
+      comment: "注册时间",
+    },
+    // TODO：
+    // avatar: {
+    //   type: DataTypes.TEXT,
+    //   field: "avatar",
+    //   allowNull: false,
+    //   comment: "头像图片 base64 值",
+    // },
   },
   {
     // 传递连接实例
