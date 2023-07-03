@@ -12,13 +12,13 @@ packages/studiousFront/src/utils
 packages/studiousFront/test
 
 
-packages/studworkFront/src/auto-imports.d.ts
-packages/studworkFront/src/components.d.ts
-packages/studworkFront/.env
-packages/studworkFront/dist
-packages/studworkFront/src/assets
-packages/studworkFront/public
-packages/studworkFront/dev-dist/
-packages/studworkFront/vite.config.js
-packages/studworkFront/src/utils
-packages/studworkFront/test
+packages/studtworkBackstage/src/auto-imports.d.ts
+packages/studtworkBackstage/src/components.d.ts
+packages/studtworkBackstage/.env
+packages/studtworkBackstage/dist
+packages/studtworkBackstage/src/assets
+packages/studtworkBackstage/public
+packages/studtworkBackstage/dev-dist/
+packages/studtworkBackstage/vite.config.js
+packages/studtworkBackstage/src/utils
+packages/studtworkBackstage/test
