@@ -1,17 +1,5 @@
 commitlint.config.js
 
-packages/studiousFront/src/auto-imports.d.ts
-packages/studiousFront/src/components.d.ts
-packages/studiousFront/.env
-packages/studiousFront/dist
-packages/studiousFront/src/assets
-packages/studiousFront/public
-packages/studiousFront/dev-dist/
-packages/studiousFront/vite.config.js
-packages/studiousFront/src/utils
-packages/studiousFront/test
-
-
 packages/studtworkBackstage/src/auto-imports.d.ts
 packages/studtworkBackstage/src/components.d.ts
 packages/studtworkBackstage/.env
