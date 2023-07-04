@@ -5,7 +5,7 @@
  * @version:
  * @Date: 2023-06-21 18:10:04
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-07-03 20:30:28
+ * @LastEditTime: 2023-07-03 23:02:20
 -->
 <script setup>
 import { ref, onMounted } from "vue";
@@ -173,6 +173,7 @@ const notification = (type, msg) => {
           <div class="logo-des">{{ $t("loginPage.logoDesc") }}</div>
         </div>
       </el-col>
+
       <el-col :xs="24" :sm="24" :md="12" :lg="12" class="login-right">
         <div class="login-form-container">
           <h1>{{ $t("loginPage.loginTitle") }}</h1>
