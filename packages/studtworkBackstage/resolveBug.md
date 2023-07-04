@@ -195,3 +195,13 @@ test: {
   <!-- ---------------------------------- -->
 </el-form>
 ```
+
+## Cannot install with "frozen-lockfile" because pnpm-lock.yaml is not up to date with packages/studtworkBackend/package.json
+
+- 描述
+
+由于重命名了一下项目，导致出现了部署、打包等问题
+
+- 解决
+
+重命名后，需要将全部的 package 文件中的名字都改了，并且删除 lock 和依赖重新上传，同时还需要更改一下打包后的文件夹
