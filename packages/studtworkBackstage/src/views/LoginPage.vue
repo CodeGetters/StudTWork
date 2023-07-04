@@ -5,18 +5,23 @@
  * @version:
  * @Date: 2023-06-21 18:10:04
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-07-03 15:44:18
+ * @LastEditTime: 2023-07-03 20:30:28
 -->
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import i18n from "@/i18n";
-import { changeTheme } from "@/utils/index";
-import { getLogin } from "@/api/user";
+import { changeTheme, recallTheme } from "@/utils/index";
+import { postLogin } from "@/api/user";
 import { useRouter } from "vue-router";
 import useAuthStore from "../store/auth";
 
 const authStore = useAuthStore();
 const router = useRouter();
+
+onMounted(() => {
+  // 首次渲染获取用户设置的主题
+  recallTheme();
+});
 
 // TODO:语言切换持久全局化
 import { useI18n } from "vue-i18n";
@@ -115,7 +120,7 @@ const submitForm = async () => {
       pwd,
     };
     // 调用登录接口
-    await getLogin(isRight)
+    await postLogin(isRight)
       .then((res) => {
         notification("success");
         // token 持久化

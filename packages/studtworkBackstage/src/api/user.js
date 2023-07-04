@@ -5,7 +5,7 @@
  * @version:
  * @Date: 2023-06-29 22:05:35
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-07-03 15:49:56
+ * @LastEditTime: 2023-07-03 21:10:27
  */
 import service from "./index";
 
@@ -48,8 +48,16 @@ export const getRouter = (data) => {
  * @param {*} data
  * @returns res
  */
-export const getLogin = async (data) => {
+export const postLogin = async (data) => {
   const response = await service.post("/user/login", {
+    userName: data.value.userName,
+    pwd: data.value.pwd,
+  });
+  return response.data;
+};
+
+export const postRegister = async (data) => {
+  const response = await service.post("/user/register", {
     userName: data.value.userName,
     pwd: data.value.pwd,
   });

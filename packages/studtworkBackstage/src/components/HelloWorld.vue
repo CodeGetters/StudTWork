@@ -4,7 +4,7 @@
  * @version:
  * @Date: 2023-06-18 20:30:52
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-07-02 13:07:49
+ * @LastEditTime: 2023-07-03 21:21:52
 -->
 <script setup>
 defineProps({
@@ -16,6 +16,24 @@ const count = ref(0);
 import { ref } from "vue";
 import { Check } from "@element-plus/icons-vue";
 const api = import.meta.env.VITE_BASE_URL;
+
+import { postRegister } from "../api/user";
+
+const register = ref({
+  userName: "smallWu",
+  pwd: "smallWu123",
+});
+
+// 测试调用注册请求
+const registerPost = async () => {
+  await postRegister(register)
+    .then((res) => {
+      console.log("注册成功 res:", res);
+    })
+    .catch((err) => {
+      console.log("注册失败", err);
+    });
+};
 
 // vue-i18n国际化
 // import i18n from "@/i18n/index.js";
@@ -36,6 +54,7 @@ const api = import.meta.env.VITE_BASE_URL;
   <h1>{{ msg }}</h1>
 
   <div class="card">
+    <button @click="registerPost()">注册</button>
     <button type="button" @click="count++">count is {{ count }}</button>
     <p>
       Edit
