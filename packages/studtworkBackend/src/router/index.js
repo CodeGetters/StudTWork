@@ -5,7 +5,7 @@
  * @version:
  * @Date: 2023-06-23 17:58:01
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-07-03 13:52:17
+ * @LastEditTime: 2023-07-04 23:59:44
  */
 const Router = require("@koa/router");
 
@@ -27,8 +27,11 @@ router
   .post("/user/register", userController.createUser)
   // 用户登录
   .post("/user/login", userController.userLogin)
+  // 更改密码
+  .post("/user/update", userController.updatePwd)
+  .post("/user/info", userController.updateUser)
   // 获取权限内的所有用户
-  .get("/user", userController.getUser);
+  .get("/user/find", userController.getUser);
 // 删除用户
 // .post("/user/delete", userController);
 /* -------------------------------------------------------- */

@@ -5,7 +5,7 @@
  * @version:
  * @Date: 2023-06-29 23:29:57
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-07-03 14:20:58
+ * @LastEditTime: 2023-07-05 00:04:20
  */
 const baseController = require("./index");
 
@@ -133,28 +133,40 @@ class userController extends baseController {
     let msg = "";
     let data = "";
     let userList = "";
+    let validToken = "";
 
-    const token = ctx.headers.authorization.split(" ")[1];
+    try {
+      // 从请求头中获取 token
+      const token = ctx.headers.authorization.split(" ")[1];
+      validToken = verifyToken(token);
+    } catch (err) {
+      console.log(yellow("[FIND ALLUSER]:Token 已过期"));
+    }
+
+    /**
+     * @description 根据用户的权限值获取权限下的所有用户
+     * @param {*} userAuthority
+     * @returns
+     */
     const searchUser = async (userAuthority) => {
       const res = await userModel.findAll({
         attributes: ["id", "userName", "authority", "role", "registerTime"],
         where: {
           authority: {
-            // Op.lte 来表示小于等于运算符
-            [Op.lte]: userAuthority,
+            // Op.lte 来表示小于等于运算符 gt:> gte:>= lt:<
+            [Op.lt]: userAuthority,
           },
         },
       });
       return res;
     };
-
-    const validToken = verifyToken(token);
     if (validToken) {
       const userAuthority = validToken.authority;
 
       // 根据权限值不同做不用的事情 游客-用户-管理员-超级管理员
       if (userAuthority === 1) {
         msg = "用户权限等级不够，查询失败";
+        ctx.response.status = 403;
       } else {
         userList = await searchUser(userAuthority);
         msg = "查询成功";
@@ -169,6 +181,82 @@ class userController extends baseController {
       ctx.response.status = 404;
     }
     ctx.body = baseController.renderJsonSuccess(msg, data);
+  }
+
+  /**
+   * @description 用户修改自己账户的密码
+   * @param {*} ctx
+   */
+  static async updatePwd(ctx) {
+    let msg = "";
+
+    try {
+      // 从请求头中获取 token
+      const token = ctx.headers.authorization.split(" ")[1];
+      verifyToken(token);
+      console.log(blue("[FIND ALLUSER]:Token 有效"));
+    } catch (err) {
+      console.log(yellow("[FIND ALLUSER]:Token 已过期"));
+    }
+    // TODO：提取 token 中携带的信息与需要修改的用户进行比较---身份验证
+    const { userName, newPwd, oldPwd } = ctx.request.body;
+
+    // 根据用户名进行查该用户的相关信息
+    const userInfo = await userModel.findOne({
+      attributes: ["id", "userName", "pwd"],
+      where: {
+        userName,
+      },
+    });
+    const original = userInfo.dataValues;
+    console.log("test", original);
+
+    if (original.pwd !== oldPwd) {
+      console.log("修改失败", original);
+      msg = "原密码错误，修改失败";
+      ctx.response.status = 401;
+    } else {
+      // 更新密码
+      try {
+        await userModel.update(
+          {
+            pwd: newPwd,
+          },
+          {
+            where: {
+              id: original.id,
+            },
+          }
+        );
+      } catch (err) {
+        console.log("失败：", err);
+        msg = "修改时发生错误，请重试";
+        ctx.response.status = 500;
+      }
+
+      msg = "修改成功，请使用新密码重新登录";
+      ctx.response.status = 200;
+    }
+    ctx.body = baseController.renderJsonSuccess(msg);
+  }
+
+  /**
+   * @description 用户信息更新
+   * @param {*} ctx
+   */
+  static async updateUser(ctx) {
+    let msg = "";
+    // TODO:先鉴权在操作
+    // const { userName, oldInfo, newInfo } = ctx.request.body;
+
+    // const userInfo = await userModel.findOne({
+    //   where: {
+    //     userName,
+    //   },
+    // });
+    // console.log("userInfo:", userInfo);
+
+    ctx.response.body = baseController.renderJsonSuccess(msg);
   }
 }
 
