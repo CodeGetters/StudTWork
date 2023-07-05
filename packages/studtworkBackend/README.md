@@ -27,3 +27,12 @@ koa-jwt---对 jsonwebtoken 的进一步封装，实现检验
 ## 登录接口
 
 ## 颁发 token
+
+## HTTP 状态码参考
+
+- 200 OK：表示请求已成功处理，并且响应包含所需的数据。
+- 400 Bad Request：表示请求无效或无法被服务器理解。
+- 401 Unauthorized：表示请求需要身份验证。
+- 403 Forbidden：表示服务器拒绝了请求。
+- 404 Not Found：表示请求的资源不存在。
+- 500 Internal Server Error：表示服务器遇到了一个错误，无法完成请求。
