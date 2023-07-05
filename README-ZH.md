@@ -1,14 +1,14 @@
 # StudTWork
 
-English | [简体中文](./README-ZH.md)
+[English](./README.md) | 简体中文
 
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FCodeGetters%2FstudTBack.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FCodeGetters%2FstudTBack?ref=badge_shield)
 
-> A front end uses [Vue3.3](https://github.com/vuejs/core) + [Vite](https://github.com/element-plus/element-plus) technology, and the back end uses the blog front and back end system built by [koa2](https://github.com/koajs/koa)
+> 一个使用前后台使用 [Vue3.3](https://github.com/vuejs/core) + [Vite](https://github.com/element-plus/element-plus)，后端使用 [koa2](https://github.com/koajs/koa) 构建打造的博客前后台系统。
 
-## Installation
+## 下载
 
-Requires:
+你应该有:
 
 - node >= `16`
 
@@ -17,10 +17,10 @@ Requires:
 ```shell
 $ git clone https://github.com/CodeGetters/studTBack.git
 
-# recommend
+# 推荐使用 pnpm
 $ pnpm install
 
-# or
+# 或者 npm
 
 $ npm install
 ```
@@ -28,24 +28,24 @@ $ npm install
 ## Usage
 
 ```shell
-# front
+# 后台
 $ pnpm dev:front
 
-# back
+# 后端
 $ pnpm dev:back
 
-# build
+# 打包
 $ pnpm build:front
 
-# or you just want to build with mock data
+# 或者你想打包有 mock 数据的后台项目
 $ pnpm build:front-mock
 ```
 
-## Contribution
+## 贡献
 
-If you would like to work on the `TODO` project, please submit your `pr` to the `dev` branch 👀
+如果你愿意做项目中的 `TODO` 中的内容，请将你的 `pr` 提交到 `dev` 分支 👀
 
-## License
+## 许可证
 
 Apache 2.0
 
