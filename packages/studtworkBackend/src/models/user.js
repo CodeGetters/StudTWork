@@ -5,7 +5,7 @@
  * @version:
  * @Date: 2023-06-30 11:48:21
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-07-03 13:49:02
+ * @LastEditTime: 2023-07-05 15:04:41
  */
 
 // const { green } = require("kolorist");
@@ -30,6 +30,18 @@ userModel.init(
       allowNull: false,
       field: "userName",
       comment: "用户名(5-12)或邮箱",
+    },
+    sex: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      field: "sex",
+      comment: "性别",
+    },
+    isDelete: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      field: "isDelete",
+      comment: "是否被删除",
     },
     pwd: {
       type: DataTypes.STRING,

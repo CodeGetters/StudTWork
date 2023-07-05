@@ -5,7 +5,7 @@
  * @version:
  * @Date: 2023-06-29 23:29:57
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-07-05 00:04:20
+ * @LastEditTime: 2023-07-05 14:50:13
  */
 const baseController = require("./index");
 
@@ -53,13 +53,14 @@ class userController extends baseController {
           // 超级管理员 4、管理员 3、普通用户 2、游客 1
           authority: 2,
           role: "普通用户",
+          sex: "未知",
         });
         ctx.response.status = 200;
 
         // 获取用户注册的相关信息
         const lastUser = await userModel.findOne({
           order: [["id", "DESC"]],
-          attributes: ["id", "userName", "authority", "role"],
+          attributes: ["id", "userName", "authority", "role", "sex"],
         });
         // token 需要携带的用户信息
         userInfo = {
@@ -67,6 +68,7 @@ class userController extends baseController {
           userName,
           authority: lastUser.dataValues.authority,
           role: lastUser.dataValues.role,
+          sex: lastUser.data.sex,
         };
         data = { token: await createToken(userInfo) };
         msg = "用户注册成功";
@@ -90,7 +92,7 @@ class userController extends baseController {
 
     // 根据用户名查询用户的 id、账号、密码、权限等级字段
     const userExist = await userModel.findOne({
-      attributes: ["id", "userName", "pwd", "authority"],
+      attributes: ["id", "userName", "pwd", "authority", "sex"],
       where: {
         userName,
       },
@@ -113,6 +115,7 @@ class userController extends baseController {
         id: userExist.dataValues.id,
         userName: userExist.dataValues.userName,
         authority: userExist.dataValues.authority,
+        sex: userExist.dataValues.sex,
       };
       console.log(blue("[USER LOGIN]:登录成功"));
 
@@ -150,7 +153,14 @@ class userController extends baseController {
      */
     const searchUser = async (userAuthority) => {
       const res = await userModel.findAll({
-        attributes: ["id", "userName", "authority", "role", "registerTime"],
+        attributes: [
+          "id",
+          "userName",
+          "authority",
+          "role",
+          "registerTime",
+          "sex",
+        ],
         where: {
           authority: {
             // Op.lte 来表示小于等于运算符 gt:> gte:>= lt:<
@@ -246,14 +256,58 @@ class userController extends baseController {
    */
   static async updateUser(ctx) {
     let msg = "";
+
+    // 可以修改的信息有：用户名、性别
     // TODO:先鉴权在操作
-    // const { userName, oldInfo, newInfo } = ctx.request.body;
+    // const { newInfo } = ctx.request.body;
+    let validToken = "";
+
+    // const { userInfo } = ctx.request.body;
+
+    // 判断 token
+    try {
+      // 从请求头中获取 token
+      const token = ctx.headers.authorization.split(" ")[1];
+      validToken = verifyToken(token);
+      console.log("token 正常");
+    } catch (err) {
+      console.log(yellow("[FIND ALLUSER]:Token 已过期"));
+    }
+    console.log("validToken:", validToken.userName);
 
     // const userInfo = await userModel.findOne({
+    //   attributes: ["userName"],
     //   where: {
-    //     userName,
+    //     userName: validToken.userName
     //   },
     // });
+
+    // if (isExist) {
+    //   console.log("用户名已经存在，修改失败");
+    // } else {
+    //   console.log("修改成功");
+    // }
+
+    try {
+      // 更新用户的用户信息
+      await userModel.update(
+        {
+          // 可以更新的信息
+          userName: validToken.userName,
+        },
+        {
+          where: {
+            id: validToken.id,
+          },
+        }
+      );
+    } catch (err) {
+      console.log("更新时失败", err);
+    }
+
+    // 如果没有找到该用户，更新失败
+    // 如果该用户 token 失效，更新失败
+    // 用新信息覆盖旧的信息
     // console.log("userInfo:", userInfo);
 
     ctx.response.body = baseController.renderJsonSuccess(msg);
@@ -261,3 +315,5 @@ class userController extends baseController {
 }
 
 module.exports = userController;
+
+// TODO：用户登录时返回用户的 ip 地址(转成在那个省)，并将登录位置信息记录起来
