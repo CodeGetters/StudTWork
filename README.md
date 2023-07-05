@@ -45,6 +45,13 @@ $ pnpm build:front-mock
 
 If you would like to work on the `TODO` project, please submit your `pr` to the `dev` branch 👀
 
+Most importantly: run a command to check the code before committing it🤞
+
+```shell
+# This will prevent your code from being reset
+$ pnpm lint
+```
+
 ## License
 
 Apache 2.0
