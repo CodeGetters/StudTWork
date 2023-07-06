@@ -1,34 +1,5 @@
 <script setup>
-const avatarGroup = [
-  {
-    src: "/src/assets/layout/search.svg",
-    onPress: () => {},
-  },
-  {
-    src: "src/assets/layout/translate.svg",
-    onPress: () => {},
-  },
-  {
-    src: "src/assets/layout/notification.svg",
-    onPress: () => {},
-  },
-  {
-    src: "src/assets/layout/theme.svg",
-    onPress: () => {},
-  },
-  {
-    src: "src/assets/layout/setting.svg",
-    onPress: () => {},
-  },
-  {
-    src: "src/assets/layout/motif.svg",
-    onPress: () => {},
-  },
-  {
-    src: "/src/assets/layout/avatar.png",
-    onPress: () => {},
-  },
-];
+import { avatarGroup } from "@/utils/assets";
 </script>
 
 <template>

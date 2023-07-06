@@ -1,0 +1,38 @@
+import search from "../assets/layout/search.svg";
+import translate from "../assets/layout/translate.svg";
+import notification from "../assets/layout/notification.svg";
+import theme from "../assets/layout/theme.svg";
+import setting from "../assets/layout/setting.svg";
+import motif from "../assets/layout/motif.svg";
+import avatar from "../assets/layout/avatar.png";
+
+export const avatarGroup = [
+  {
+    src: search,
+    onPress: () => {},
+  },
+  {
+    src: translate,
+    onPress: () => {},
+  },
+  {
+    src: notification,
+    onPress: () => {},
+  },
+  {
+    src: theme,
+    onPress: () => {},
+  },
+  {
+    src: setting,
+    onPress: () => {},
+  },
+  {
+    src: motif,
+    onPress: () => {},
+  },
+  {
+    src: avatar,
+    onPress: () => {},
+  },
+];
