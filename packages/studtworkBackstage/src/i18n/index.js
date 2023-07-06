@@ -4,7 +4,7 @@
  * @version:
  * @Date: 2023-06-21 19:40:19
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-06-30 23:00:16
+ * @LastEditTime: 2023-07-06 16:48:10
  */
 import { createI18n } from "vue-i18n";
 import enUS from "./locales/en/en.js";

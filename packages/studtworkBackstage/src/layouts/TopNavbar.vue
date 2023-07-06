@@ -1,5 +1,20 @@
 <script setup>
 import { avatarGroup } from "@/utils/assets";
+import translate from "../assets/layout/translate.svg";
+
+// TODO:语言切换持久全局化
+import { useI18n } from "vue-i18n";
+const { locale } = useI18n();
+
+/**
+ * @description 语言切换
+ */
+const changeLang = () => {
+  console.log("切换成功！");
+  locale.value === "zh-cn"
+    ? (locale.value = "en-us")
+    : (locale.value = "zh-cn");
+};
 </script>
 
 <template>
@@ -16,11 +31,14 @@ import { avatarGroup } from "@/utils/assets";
       <el-col :xs="0" :sm="8" :md="10" :lg="12" />
       <el-col :xs="16" :sm="12" :md="10" :lg="6" class="right">
         <div class="avatarGroup">
+          <div class="icon" @click="changeLang()">
+            <img :src="translate" alt="" />
+          </div>
           <div
             class="icon"
             v-for="item in avatarGroup"
             :key="item"
-            @click="avatarGroup.onPress"
+            @click="item.onPress"
           >
             <img :src="item.src" alt="" />
           </div>
@@ -29,15 +47,16 @@ import { avatarGroup } from "@/utils/assets";
     </el-row>
   </div>
 </template>
-<!-- 1920 / 24 = 80 -->
 <style lang="less">
 #TopNavbar {
   height: 5.5%;
+  border-bottom: 1px solid #e5e6eb;
 
   .el-row {
     width: 100%;
     height: 100%;
     background-color: var(--navbar-bgc);
+
     // 480
     .left {
       width: 100%;
@@ -104,6 +123,7 @@ import { avatarGroup } from "@/utils/assets";
           margin-right: 2.5%;
           background-color: #ccc;
           overflow: hidden;
+          cursor: pointer;
 
           img {
             width: 100%;

@@ -6,6 +6,8 @@ import setting from "../assets/layout/setting.svg";
 import motif from "../assets/layout/motif.svg";
 import avatar from "../assets/layout/avatar.png";
 
+import { changeTheme } from ".";
+
 export const avatarGroup = [
   {
     src: search,
@@ -21,7 +23,9 @@ export const avatarGroup = [
   },
   {
     src: theme,
-    onPress: () => {},
+    onPress: () => {
+      changeTheme();
+    },
   },
   {
     src: setting,
