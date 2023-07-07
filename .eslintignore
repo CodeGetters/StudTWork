@@ -10,3 +10,4 @@ packages/studtworkBackstage/dev-dist/
 packages/studtworkBackstage/vite.config.js
 packages/studtworkBackstage/src/utils
 packages/studtworkBackstage/test
+packages/studtworkFrontDesk/
