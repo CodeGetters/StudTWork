@@ -4,20 +4,21 @@
  * @version:
  * @Date: 2023-06-20 16:51:34
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-07-05 23:01:14
+ * @LastEditTime: 2023-07-07 10:52:30
 -->
 <script setup>
 // import { changeTheme } from "@/utils/index.js";
+import LeftMenu from "../layouts/LeftMenu.vue";
 import TopNavbar from "../layouts/TopNavbar.vue";
 </script>
 
 <template>
   <div id="HomePage">
-    <!-- <HelloWorld /> -->
     <TopNavbar />
-    <!-- <button @click="changeTheme()">切换到 Hello 页</button> -->
-
-    <router-link to="/login">登录</router-link>
+    <div class="contentBox">
+      <LeftMenu />
+      <router-view />
+    </div>
   </div>
 </template>
 
@@ -26,7 +27,12 @@ import TopNavbar from "../layouts/TopNavbar.vue";
   height: 100vh;
   width: 100%;
   min-width: 375px;
-  background-color: #ccc;
-  // background-color: var(--bgc);
+
+  .contentBox {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+  }
 }
 </style>

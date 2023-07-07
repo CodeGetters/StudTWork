@@ -5,7 +5,7 @@
  * @version:
  * @Date: 2023-06-21 18:10:04
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-07-03 23:02:20
+ * @LastEditTime: 2023-07-06 23:31:49
 -->
 <script setup>
 import { ref, onMounted } from "vue";
@@ -127,8 +127,6 @@ const submitForm = async () => {
         authStore.setToken(JSON.stringify(res.data.token));
         router.push({
           path: "/home",
-          // 参数
-          // query: {},
         });
       })
       .catch((err) => {

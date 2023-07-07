@@ -4,7 +4,7 @@
  * @version:
  * @Date: 2023-06-21 20:00:16
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-07-02 13:34:29
+ * @LastEditTime: 2023-07-06 23:15:31
  */
 const zhCN = {
   admin: "后台管理系统",
@@ -30,6 +30,14 @@ const zhCN = {
     accountVerify: "请输入邮箱或5-12位包含字母的用户名",
     pwdVerify: "请输入5-12位包含字母和数字的密码",
     noNone: "输入框不能为空",
+  },
+  layout: {
+    homePage: "主页",
+    controlCenter: "管理台",
+    userManage: "用户管理",
+    commentManage: "评论管理",
+    articleManage: "文章管理",
+    userCenter: "用户中心",
   },
 };
 
