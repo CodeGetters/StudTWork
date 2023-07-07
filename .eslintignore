@@ -11,4 +11,4 @@ packages/backstage/dev-dist/
 packages/backstage/vite.config.js
 packages/backstage/src/utils
 packages/backstage/test
-packages/frontdend/
+packages/frontend/
