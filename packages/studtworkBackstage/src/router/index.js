@@ -4,13 +4,19 @@
  * @version:
  * @Date: 2023-06-18 21:18:19
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-07-03 16:13:30
+ * @LastEditTime: 2023-07-07 10:50:00
  */
 import { createRouter, createWebHistory } from "vue-router";
 
 const Home = () => import("../views/HomePage.vue");
 const Login = () => import("../views/LoginPage.vue");
 const NotFound = () => import("../views/NotFound.vue");
+const UserManage = () => import("../components/UserManage.vue");
+const UserHome = () => import("../components/UserHome.vue");
+const CommentManage = () => import("../components/CommentManage.vue");
+const UserCenter = () => import("../components/UserCenter.vue");
+
+const ArticleManage = () => import("../components/ArticleManage.vue");
 const routes = [
   {
     path: "/",
@@ -18,6 +24,28 @@ const routes = [
     name: "Home",
     component: Home,
     meta: { transition: "slide-right" },
+    children: [
+      {
+        path: "",
+        component: UserHome,
+      },
+      {
+        path: "/userManage",
+        component: UserManage,
+      },
+      {
+        path: "/commentManage",
+        component: CommentManage,
+      },
+      {
+        path: "articleManage",
+        component: ArticleManage,
+      },
+      {
+        path: "/userCenter",
+        component: UserCenter,
+      },
+    ],
   },
   {
     path: "/login",

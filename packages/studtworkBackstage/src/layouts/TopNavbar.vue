@@ -2,9 +2,11 @@
 import { avatarGroup } from "@/utils/assets";
 import translate from "../assets/layout/translate.svg";
 
-// TODO:语言切换持久全局化
 import { useI18n } from "vue-i18n";
 const { locale } = useI18n();
+
+import { useRouter } from "vue-router";
+const router = useRouter();
 
 /**
  * @description 语言切换
@@ -15,13 +17,18 @@ const changeLang = () => {
     ? (locale.value = "en-us")
     : (locale.value = "zh-cn");
 };
+
+// 路由跳转
+const toHome = () => {
+  router.push("/home");
+};
 </script>
 
 <template>
   <div id="TopNavbar">
     <el-row>
       <el-col :xs="8" :sm="4" :md="4" :lg="6" class="left">
-        <div class="logoBox">
+        <div class="logoBox" @click="toHome()">
           <div class="logo">
             <img src="@/assets/logo.svg" alt="logo" />
           </div>
@@ -73,6 +80,7 @@ const changeLang = () => {
         display: flex;
         flex-direction: row;
         align-items: center;
+        cursor: pointer;
 
         .logo {
           width: 31.5%;

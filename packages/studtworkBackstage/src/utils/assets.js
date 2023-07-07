@@ -1,5 +1,4 @@
 import search from "../assets/layout/search.svg";
-import translate from "../assets/layout/translate.svg";
 import notification from "../assets/layout/notification.svg";
 import theme from "../assets/layout/theme.svg";
 import setting from "../assets/layout/setting.svg";
@@ -11,10 +10,6 @@ import { changeTheme } from ".";
 export const avatarGroup = [
   {
     src: search,
-    onPress: () => {},
-  },
-  {
-    src: translate,
     onPress: () => {},
   },
   {

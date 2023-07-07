@@ -8,10 +8,20 @@ import {
   User,
   Fold,
   Expand,
-  // Expand
 } from "@element-plus/icons-vue";
 
 const isCollapse = ref(false);
+
+import { useRouter } from "vue-router";
+const router = useRouter();
+
+const routerJump = (url, param) => {
+  router.push({
+    path: url,
+    query: param,
+  });
+};
+
 const handleOpen = (key, keyPath) => {
   console.log(key, keyPath);
 };
@@ -30,9 +40,9 @@ const handleClose = (key, keyPath) => {
       @close="handleClose"
       active-text-color="#165DFF"
     >
-      <el-menu-item index="1">
+      <el-menu-item index="1" @click="routerJump('/home', {})">
         <el-icon><Odometer /></el-icon>
-        <template #title>首页</template>
+        <template #title>{{ $t("layout.homePage") }}</template>
       </el-menu-item>
       <el-sub-menu index="2">
         <template #title>
@@ -46,21 +56,26 @@ const handleClose = (key, keyPath) => {
           <span>工作台</span>
         </template>
       </el-sub-menu>
-
       <el-sub-menu index="4">
         <template #title>
           <el-icon><setting /></el-icon>
-          <span>管理台</span>
+          <span>{{ $t("layout.controlCenter") }}</span>
         </template>
         <el-menu-item-group>
-          <el-menu-item index="4-1">用户管理</el-menu-item>
-          <el-menu-item index="4-2">内容管理</el-menu-item>
-          <el-menu-item index="4-3">评论管理</el-menu-item>
+          <el-menu-item index="4-1" @click="routerJump('/userManage', {})">{{
+            $t("layout.userManage")
+          }}</el-menu-item>
+          <el-menu-item index="4-2" @click="routerJump('/articleManage', {})">{{
+            $t("layout.articleManage")
+          }}</el-menu-item>
+          <el-menu-item index="4-3" @click="routerJump('/commentManage', {})">{{
+            $t("layout.commentManage")
+          }}</el-menu-item>
         </el-menu-item-group>
       </el-sub-menu>
-      <el-menu-item index="5">
+      <el-menu-item index="5" @click="routerJump('/userCenter', {})">
         <el-icon><User /></el-icon>
-        <template #title>个人中心</template>
+        <template #title>{{ $t("layout.userCenter") }}</template>
       </el-menu-item>
     </el-menu>
     <button class="isOpen" @click="isCollapse = !isCollapse">

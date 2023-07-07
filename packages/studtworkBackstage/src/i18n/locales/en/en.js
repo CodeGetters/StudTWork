@@ -4,7 +4,7 @@
  * @version:
  * @Date: 2023-06-21 20:00:09
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-07-02 13:36:36
+ * @LastEditTime: 2023-07-06 23:14:22
  */
 const zhCN = {
   admin: "admin",
@@ -31,6 +31,14 @@ const zhCN = {
     pwdVerify:
       "Please enter a 5-12 digit password containing letters and numbers",
     noNone: "The input field cannot be empty",
+  },
+  layout: {
+    homePage: "homePage",
+    controlCenter: "manage board",
+    userManage: "user manage",
+    commentManage: "comment manage",
+    articleManage: "article manage",
+    userCenter: "user center",
   },
 };
 

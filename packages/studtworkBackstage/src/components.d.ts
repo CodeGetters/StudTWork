@@ -7,8 +7,9 @@ export {}
 
 declare module "vue" {
   export interface GlobalComponents {
+    ArticleManage: typeof import("./components/ArticleManage.vue")["default"];
+    CommentManage: typeof import("./components/CommentManage.vue")["default"];
     ElButton: typeof import("element-plus/es")["ElButton"];
-    ElCascaderPanel: typeof import("element-plus/es")["ElCascaderPanel"];
     ElCol: typeof import("element-plus/es")["ElCol"];
     ElDivider: typeof import("element-plus/es")["ElDivider"];
     ElForm: typeof import("element-plus/es")["ElForm"];
@@ -18,12 +19,13 @@ declare module "vue" {
     ElMenu: typeof import("element-plus/es")["ElMenu"];
     ElMenuItem: typeof import("element-plus/es")["ElMenuItem"];
     ElMenuItemGroup: typeof import("element-plus/es")["ElMenuItemGroup"];
-    ElRadioButton: typeof import("element-plus/es")["ElRadioButton"];
-    ElRadioGroup: typeof import("element-plus/es")["ElRadioGroup"];
     ElRow: typeof import("element-plus/es")["ElRow"];
     ElSubMenu: typeof import("element-plus/es")["ElSubMenu"];
     HelloWorld: typeof import("./components/HelloWorld.vue")["default"];
     RouterLink: typeof import("vue-router")["RouterLink"];
     RouterView: typeof import("vue-router")["RouterView"];
+    UserCenter: typeof import("./components/UserCenter.vue")["default"];
+    UserHome: typeof import("./components/UserHome.vue")["default"];
+    UserManage: typeof import("./components/UserManage.vue")["default"];
   }
 }
