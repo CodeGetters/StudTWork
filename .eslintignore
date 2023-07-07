@@ -11,3 +11,16 @@ packages/studtworkBackstage/vite.config.js
 packages/studtworkBackstage/src/utils
 packages/studtworkBackstage/test
 packages/studtworkFrontDesk/
+
+
+packages/Backstage/src/auto-imports.d.ts
+packages/Backstage/src/components.d.ts
+packages/Backstage/.env
+packages/Backstage/dist
+packages/Backstage/src/assets
+packages/Backstage/public
+packages/Backstage/dev-dist/
+packages/Backstage/vite.config.js
+packages/Backstage/src/utils
+packages/Backstage/test
+packages/FrontDesk/
