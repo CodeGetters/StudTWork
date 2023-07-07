@@ -11,3 +11,16 @@ packages/backStage/vite.config.js
 packages/backStage/src/utils
 packages/backStage/test
 packages/frontDesk/
+
+
+packages/backstage/src/auto-imports.d.ts
+packages/backstage/src/components.d.ts
+packages/backstage/.env
+packages/backstage/dist
+packages/backstage/src/assets
+packages/backstage/public
+packages/backstage/dev-dist/
+packages/backstage/vite.config.js
+packages/backstage/src/utils
+packages/backstage/test
+packages/frontdesk/

@@ -21,7 +21,6 @@ declare module "vue" {
     ElMenuItemGroup: typeof import("element-plus/es")["ElMenuItemGroup"];
     ElRow: typeof import("element-plus/es")["ElRow"];
     ElSubMenu: typeof import("element-plus/es")["ElSubMenu"];
-    HelloWorld: typeof import("./components/HelloWorld.vue")["default"];
     RouterLink: typeof import("vue-router")["RouterLink"];
     RouterView: typeof import("vue-router")["RouterView"];
     UserCenter: typeof import("./components/UserCenter.vue")["default"];
