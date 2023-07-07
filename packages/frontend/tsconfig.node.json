@@ -3,8 +3,13 @@
     "composite": true,
     "skipLibCheck": true,
     "module": "ESNext",
+    "target": "ESNext",
     "moduleResolution": "bundler",
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "strict": true
   },
-  "include": ["vite.config.ts"]
+  // 配置需要校验的文件
+  "include": ["vite.config.ts", "src/**/*.ts", "src/**/*.vue"],
+  // 排除不需要 TS 检验的文件
+  "exclude": ["node_modules"]
 }

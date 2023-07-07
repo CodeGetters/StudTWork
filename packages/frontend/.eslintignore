@@ -1,0 +1,6 @@
+auto-imports.d.ts
+uno.config.ts
+vite.config.ts
+
+src/shims-vue.d.ts
+

@@ -7,11 +7,12 @@
   "scripts": {
     "dev:backstage": "pnpm -F @studtwork/backstage dev",
     "dev:backend": "pnpm -F @studtwork/backend start",
+    "dev:frontend": "pnpm -F @studtwork/frontend dev",
     "dev:lint": "pnpm -F @studtwork/frontstage lint & pnpm -F @studtwork/backend lint & pnpm -F studtwork/frontdesk lint",
     "dev:format": "pnpm -F @studtwork/backstage format& pnpm -F @studtwork/backend format",
     "build:backstage": "pnpm -F @studtwork/backstage build",
     "build:backstage-mock": "pnpm -F @studtwork/backstage build:mock",
-    "preview:backstage": "pnpm -F @studtwork/backstage preview",
+    "preview": "pnpm -F @studtwork/backstage preview",
     "lint": "eslint . --ext .vue,.js,.ts,.jsx,.tsx --fix",
     "format": "prettier --write ./**/*.{vue,ts,tsx,js,jsx,css,less,scss,json,md}",
     "test:backstage": "pnpm -F @studtwork/backstage test",
