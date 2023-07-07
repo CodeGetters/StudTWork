@@ -1,18 +1,5 @@
 commitlint.config.js
 
-packages/studtworkBackstage/src/auto-imports.d.ts
-packages/studtworkBackstage/src/components.d.ts
-packages/studtworkBackstage/.env
-packages/studtworkBackstage/dist
-packages/studtworkBackstage/src/assets
-packages/studtworkBackstage/public
-packages/studtworkBackstage/dev-dist/
-packages/studtworkBackstage/vite.config.js
-packages/studtworkBackstage/src/utils
-packages/studtworkBackstage/test
-packages/studtworkFrontDesk/
-
-
 packages/backStage/src/auto-imports.d.ts
 packages/backStage/src/components.d.ts
 packages/backStage/.env
