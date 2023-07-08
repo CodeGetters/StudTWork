@@ -1,7 +1,10 @@
-<script setup lang="ts"></script>
+<script lang="ts"></script>
 
 <template>
-  <div id="HomePage"></div>
+  <div id="HomePage">
+    主页
+    <HelloWorld />
+  </div>
 </template>
 
 <style></style>

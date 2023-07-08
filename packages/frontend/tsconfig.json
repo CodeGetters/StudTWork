@@ -9,7 +9,7 @@
     // ---------------------
     // 解析非相对模块的基地址，默认是当前目录
     "baseUrl": "./",
-    // 路径映射，相对于 baseUrl
+    // 配置路径解析别名---在 vite.config.ts 中配置了还要配置一遍
     "paths": {
       "@/*": ["src/*"]
     },
@@ -18,16 +18,21 @@
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
+
+    // https://cn.vuejs.org/guide/typescript/overview.html#configuring-tsconfig-json
     "isolatedModules": true,
+
     "noEmit": true,
     "jsx": "preserve",
 
     /* Linting */
     "strict": true,
+
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

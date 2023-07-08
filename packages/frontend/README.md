@@ -29,3 +29,9 @@ declare module "*vue" {
 ```
 
 至于说这段代码的作用后面再看吧！
+
+## Volar + VsCode
+
+[setting](https://cn.vuejs.org/guide/typescript/overview.html#volar-takeover-mode)
+
+[TS with composition API](https://cn.vuejs.org/guide/typescript/composition-api.html)
